@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国传统雕版印刷 - Traditional Chinese Woodblock Printing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Songti SC", "SimSun", "Times New Roman", serif;
+            background: #f5f0e8;
+            color: #2c1810;
+            line-height: 1.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 50%, #CD5C5C 100%);
+            color: #f5f0e8;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" x="10" y="10" width="80" height="80"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.3;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #8B0000;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            color: #8B0000;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f5f0e8;
+            padding-bottom: 10px;
+        }
+
+        .section h4 {
+            font-size: 1.1rem;
+            color: #B22222;
+            margin: 20px 0 10px 0;
+        }
+
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .zh {
+            border-right: 1px solid #eee;
+            padding-right: 30px;
+        }
+
+        .en {
+            padding-left: 30px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .bilingual {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .zh {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-right: 0;
+                padding-bottom: 20px;
+            }
+            .en {
+                padding-left: 0;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .emoji-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .key-statement {
+            background: linear-gradient(135deg, #fff8f0 0%, #fff5e6 100%);
+            border: 2px solid #CD5C5C;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .display-section {
+            background: linear-gradient(180deg, #fff 0%, #f8f4ec 100%);
+        }
+
+        .display-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .display-side {
+            padding: 30px;
+            background: #faf8f5;
+            border-radius: 8px;
+        }
+
+        .display-side h4 {
+            font-size: 1.3rem;
+            color: #8B0000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .display-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: #2c1810;
+            color: #f5f0e8;
+            font-size: 0.9rem;
+        }
+
+        a {
+            color: #B22222;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>中国传统雕版印刷</h1>
+        <h2>Traditional Chinese Woodblock Printing</h2>
+    </div>
+
+    <div class="container">
+        <!-- 工艺与历史 -->
+        <div class="section">
+            <h3><span class="emoji-icon">🧾</span>工艺与历史 / Technique and Historical Context</h3>
+            <div class="bilingual">
+                <div class="zh">
+                    <p>中国传统雕版印刷是一项具有千年以上历史的工艺，通过在木板上雕刻图文，并采用凸版印刷方式将图像转印于纸张，实现信息与图像的复制与传播。</p>
+                    <p style="margin-top: 15px;">该技艺相关项目于2006年入选中国首批国家级非物质文化遗产名录，随后于2009年被联合国教科文组织列入"人类非物质文化遗产代表作名录"，体现其在全球文化体系中的重要地位。</p>
+                </div>
+                <div class="en">
+                    <p>Traditional Chinese woodblock printing is a technique with a history of over a thousand years. It involves carving text and images into wooden blocks and transferring ink onto paper through relief printing.</p>
+                    <p style="margin-top: 15px;">Related engraving and printing techniques were inscribed on China's first list of National Intangible Cultural Heritage in 2006, and in 2009 the China engraved block printing technique was included on UNESCO's Representative List of the Intangible Cultural Heritage of Humanity, highlighting its global cultural significance.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文化表达 -->
+        <div class="section">
+            <h3><span class="emoji-icon">⚖️</span>文化表达 (TCEs) / Traditional Cultural Expressions</h3>
+            <div class="bilingual">
+                <div class="zh">
+                    <p>雕版印刷中的图案、符号与构图，构成了"传统文化表现形式"(Traditional Cultural Expressions, TCEs)的重要组成部分。这些元素通常由群体在长期实践中形成，并通过代际传承延续，体现出集体性与文化连续性。</p>
+                </div>
+                <div class="en">
+                    <p>The motifs, symbols, and compositions found in woodblock printing form an integral part of Traditional Cultural Expressions (TCEs). These elements are developed collectively over time and transmitted across generations, reflecting shared cultural identity and continuity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商业功能与品牌雏形 -->
+        <div class="section">
+            <h3><span class="emoji-icon">🏛️</span>商业功能与品牌雏形 / Commercial Function and Early Branding</h3>
+            <div class="bilingual">
+                <div class="zh">
+                    <p>在中国古代商业实践中，雕版亦被用于商号经营。商家通过雕刻固定的字号、图案及吉祥符号，并反复印制于商品包装、票据及广告载体上，以标识商品来源并建立市场信誉。这种稳定且持续使用的视觉标识，在功能上已具备现代商标的基本特征。</p>
+                </div>
+                <div class="en">
+                    <p>In pre-modern China, woodblocks were also used in commercial activities. Merchants carved consistent shop names, motifs, and auspicious symbols, which were repeatedly printed on packaging, receipts, and promotional materials to identify the source of goods and build market reputation. The consistent use of such visual identifiers functionally resembles modern trademarks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 知识产权视角 -->
+        <div class="section">
+            <h3><span class="emoji-icon">🔗</span>知识产权视角 / Intellectual Property Perspective</h3>
+            <div class="bilingual">
+                <div class="zh">
+                    <p>从当代知识产权视角看，雕版印刷体现了从"传统文化表达"向"商业标识"的功能演进路径。尽管其产生于现代商标制度确立之前，但在区分商品来源、传递商誉及强化品牌认知方面，已与现代商标制度形成实质性功能对应关系。</p>
+                </div>
+                <div class="en">
+                    <p>From a contemporary intellectual property perspective, woodblock printing illustrates a historical transition from traditional cultural expressions to commercial source identifiers. Although predating modern trademark law, these practices demonstrate functional equivalence in distinguishing goods, conveying goodwill, and reinforcing brand recognition.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 当代延续与创新 -->
+        <div class="section">
+            <h3><span class="emoji-icon">🎨</span>当代延续与创新 / Contemporary Adaptation</h3>
+            <div class="bilingual">
+                <div class="zh">
+                    <p>当代雕版创作在延续传统技艺的基础上，融入现代语言与文化表达。例如"马上暴富""马到成功""马上幸福"等设计，通过"马"与"马上"的谐音表达即时祝愿，结合生肖文化，体现传统文化在当代语境中的创新与活化。</p>
+                </div>
+                <div class="en">
+                    <p>Contemporary woodblock works continue traditional techniques while incorporating modern expressions and cultural references. Designs such as "Instant Wealth," "Success Upon Arrival," and "Instant Happiness" employ phonetic wordplay between "horse" and "immediately," often linked to zodiac themes, demonstrating the ongoing evolution of traditional culture.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一句话总结 -->
+        <div class="section key-statement">
+            <p><span class="emoji-icon">🧩</span>雕版印刷不仅是文化遗产，也是中国早期商业标识与品牌体系的重要载体。</p>
+            <p style="font-style: italic; font-weight: normal; margin-top: 10px;">Woodblock printing is not only a form of cultural heritage, but also an early carrier of commercial identity and branding in China.</p>
+        </div>
+
+        <!-- 展示介绍 -->
+        <div class="section display-section">
+            <h3><span class="emoji-icon">🧧</span>展示介绍 / Display Introduction</h3>
+            <div class="display-layout">
+                <div class="display-side">
+                    <h4>传统雕版作品</h4>
+                    <p class="zh">本所于上海收藏有超过三千块原始雕版，涵盖丰富的历史题材与文化内容。本次展出的部分作品选自《西游记》系列，体现了中国古典文学与民间艺术的结合。</p>
+                    <p class="zh" style="margin-top: 10px;">其中，"一团和气""和合"等图案，体现了中国传统"和文化"的核心理念；"天行健，君子以自强不息"则源自经典典籍，强调自我奋进的精神。</p>
+                    <p class="zh" style="margin-top: 10px;">所有作品均采用宣纸印制，延续传统材料与工艺。</p>
+                </div>
+                <div class="display-side">
+                    <h4>现代雕版创作</h4>
+                    <p class="en">This collection features over 3,000 original woodblocks maintained in Shanghai, covering a wide range of historical and cultural themes.</p>
+                    <p class="en" style="margin-top: 10px;">The right side presents contemporary woodblock creations. While maintaining traditional carving and printing methods, they incorporate modern expressions and wordplay.</p>
+                    <p class="en" style="margin-top: 10px;">Phrases such as "Instant Wealth," "Success Upon Arrival," and "Instant Happiness" make use of the phonetic pun between "horse" (马) and "immediately" (马上), conveying wishes for rapid success and prosperity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>段和段（南京）律师事务所 | Duan & Duan (Nanjing) Law Firm</p>
+    </div>
+</body>
+</html>
