@@ -177,6 +177,58 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background: #faf8f5;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-item-content {
+            padding: 20px;
+        }
+
+        .gallery-item h5 {
+            font-size: 1.1rem;
+            color: #8B0000;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .gallery-item p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .gallery-item .zh-intro {
+            color: #2c1810;
+        }
+
+        .gallery-item .en-intro {
+            color: #666;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -274,6 +326,82 @@
                     <p class="en">This collection features over 3,000 original woodblocks maintained in Shanghai, covering a wide range of historical and cultural themes.</p>
                     <p class="en" style="margin-top: 10px;">The right side presents contemporary woodblock creations. While maintaining traditional carving and printing methods, they incorporate modern expressions and wordplay.</p>
                     <p class="en" style="margin-top: 10px;">Phrases such as "Instant Wealth," "Success Upon Arrival," and "Instant Happiness" make use of the phonetic pun between "horse" (马) and "immediately" (马上), conveying wishes for rapid success and prosperity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图片画廊 -->
+        <div class="section">
+            <h3><span class="emoji-icon">🖼️</span>作品展示 / Gallery</h3>
+            <div class="gallery-grid">
+                <!-- 一团和气 -->
+                <div class="gallery-item">
+                    <img src="pics- introduction/一团和气.jpeg" alt="一团和气">
+                    <div class="gallery-item-content">
+                        <h5>一团和气 / Harmony</h5>
+                        <p class="zh-intro">"一团和气"是中国传统吉祥图案，象征和谐、团结与友善。图案中的圆形构图寓意圆满完整，体现了中国传统文化中"以和为贵"的核心理念，常用于祈愿家庭和睦、社会和谐。</p>
+                        <p class="en-intro">"Yi Tuan He Qi" (A Ball of Harmony) is a traditional Chinese auspicious motif symbolizing harmony, unity, and friendliness. The circular composition represents completeness and wholeness, embodying the core Chinese philosophy that "harmony is precious." It is often used to pray for family harmony and social peace.</p>
+                    </div>
+                </div>
+
+                <!-- 仙鹤 -->
+                <div class="gallery-item">
+                    <img src="pics- introduction/仙鹤.jpeg" alt="仙鹤">
+                    <div class="gallery-item-content">
+                        <h5>仙鹤 / Immortal Crane</h5>
+                        <p class="zh-intro">仙鹤在中国传统文化中是长寿与吉祥的象征，常被称为"仙禽"。鹤的优雅姿态和洁白羽毛代表纯洁与高尚品格，其"松鹤延年"的意象更是表达了人们对健康长寿的美好祝愿。</p>
+                        <p class="en-intro">The crane is a symbol of longevity and auspiciousness in traditional Chinese culture, often referred to as the "immortal bird." The crane's elegant posture and pure white plumage represent purity and noble character. The imagery of "pine and crane extending years" expresses people's beautiful wishes for health and long life.</p>
+                    </div>
+                </div>
+
+                <!-- 千里江山图 -->
+                <div class="gallery-item">
+                    <img src="pics- introduction/千里江山图.jpeg" alt="千里江山图">
+                    <div class="gallery-item-content">
+                        <h5>千里江山图 / A Thousand Miles of Rivers and Mountains</h5>
+                        <p class="zh-intro">此作灵感源自北宋王希孟传世名画《千里江山图》，展现壮丽的中国山水风貌。雕版作品以精湛技艺重现原画的青绿山水意境，体现了中国传统艺术对自然山水的崇尚与热爱。</p>
+                        <p class="en-intro">This work is inspired by the masterpiece "A Thousand Miles of Rivers and Mountains" by Wang Ximeng of the Northern Song Dynasty, showcasing the magnificent Chinese landscape. The woodblock piece recreates the blue-green landscape artistic conception with exquisite craftsmanship, reflecting traditional Chinese art's reverence and love for natural mountains and waters.</p>
+                    </div>
+                </div>
+
+                <!-- 哪吒和太极 -->
+                <div class="gallery-item">
+                    <img src="pics- introduction/哪吒和太极.jpeg" alt="哪吒和太极">
+                    <div class="gallery-item-content">
+                        <h5>哪吒与太极 / Nezha and Tai Chi</h5>
+                        <p class="zh-intro">哪吒是中国神话传说中的少年英雄，象征着勇敢与正义；太极则是道家哲学的核心概念，代表阴阳调和、天地和谐。两者结合体现了中国传统文化中英雄主义与哲学思辨的完美融合。</p>
+                        <p class="en-intro">Nezha is a young hero in Chinese mythology, symbolizing bravery and justice; Tai Chi is a core concept of Taoist philosophy, representing the harmony of yin and yang and the balance of heaven and earth. The combination of the two reflects the perfect integration of heroism and philosophical contemplation in traditional Chinese culture.</p>
+                    </div>
+                </div>
+
+                <!-- 西游记-唐僧-八戒-沙僧 -->
+                <div class="gallery-item">
+                    <img src="pics- introduction/西游记-唐僧-八戒-沙僧.jpeg" alt="西游记-唐僧-八戒-沙僧">
+                    <div class="gallery-item-content">
+                        <h5>西游记·取经团队 / Journey to the West</h5>
+                        <p class="zh-intro">唐僧、猪八戒、沙僧与孙悟空共同组成《西游记》取经团队，历经九九八十一难最终修成正果。故事寓意人生修行需历经磨难、团结协作方能成就大业，是中国古典文学中最具影响力的神话传说之一。</p>
+                        <p class="en-intro">Tang Monk, Pigsy, Sandy, and Monkey King form the pilgrimage team in "Journey to the West," overcoming eighty-one tribulations before achieving enlightenment. The story implies that life's cultivation requires enduring hardships and working together to accomplish great deeds, making it one of the most influential mythological tales in classical Chinese literature.</p>
+                    </div>
+                </div>
+
+                <!-- 西游记-孙悟空 -->
+                <div class="gallery-item">
+                    <img src="pics- introduction/西游记-孙悟空.jpeg" alt="西游记-孙悟空">
+                    <div class="gallery-item-content">
+                        <h5>孙悟空 / Sun Wukong</h5>
+                        <p class="zh-intro">孙悟空，又称美猴王，是中国神话中最具传奇色彩的英雄形象之一。他拥有七十二般变化、筋斗云等神奇能力，象征着智慧、勇敢和不屈不挠的精神，是中国文化中反抗权威、追求自由的象征。</p>
+                        <p class="en-intro">Sun Wukong, also known as the Monkey King, is one of the most legendary heroic figures in Chinese mythology. He possesses magical abilities such as seventy-two transformations and somersault clouds, symbolizing wisdom, courage, and the spirit of perseverance. He represents resistance to authority and the pursuit of freedom in Chinese culture.</p>
+                    </div>
+                </div>
+
+                <!-- 西游记-白骨精 -->
+                <div class="gallery-item">
+                    <img src="pics- introduction/西游记-白骨精.jpeg" alt="西游记-白骨精">
+                    <div class="gallery-item-content">
+                        <h5>白骨精 / White Bone Spirit</h5>
+                        <p class="zh-intro">白骨精是《西游记》中的经典反派形象，以欺骗和伪装著称。她三次变身迷惑唐僧师徒，最终被孙悟空识破消灭。这个故事警示人们要明辨是非、识破虚假表象，是中国民间故事中最广为人知的情节之一。</p>
+                        <p class="en-intro">The White Bone Spirit is a classic villain figure in "Journey to the West," known for deception and disguise. She transformed three times to confuse Tang Monk and his disciples, but was eventually identified and destroyed by Sun Wukong. This story warns people to distinguish right from wrong and see through false appearances, making it one of the most widely known plots in Chinese folklore.</p>
+                    </div>
                 </div>
             </div>
         </div>
