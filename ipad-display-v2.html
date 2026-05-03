@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国传统雕版印刷 - 展示模式</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #f5f0e8;
+        }
+
+        body {
+            font-family: "Songti SC", "SimSun", "Times New Roman", serif;
+            color: #2c1810;
+        }
+
+        .scroll-container {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 50%, #CD5C5C 100%);
+            color: #f5f0e8;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: 1rem;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid #8B0000;
+        }
+
+        .section h3 {
+            font-size: 1.4rem;
+            color: #8B0000;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f5f0e8;
+        }
+
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .zh {
+            border-right: 1px solid #eee;
+            padding-right: 25px;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+
+        .en {
+            padding-left: 25px;
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .emoji-icon {
+            font-size: 1.3rem;
+            margin-right: 8px;
+        }
+
+        .key-statement {
+            background: linear-gradient(135deg, #fff8f0 0%, #fff5e6 100%);
+            border: 2px solid #CD5C5C;
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: bold;
+            padding: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background: #faf8f5;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-content {
+            padding: 18px;
+        }
+
+        .gallery-item h5 {
+            font-size: 1.1rem;
+            color: #8B0000;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .gallery-item p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .gallery-item .zh-intro {
+            color: #2c1810;
+        }
+
+        .gallery-item .en-intro {
+            color: #666;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            color: #888;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 100px;
+        }
+
+        .control-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(44, 24, 16, 0.9);
+            padding: 12px 25px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn {
+            background: #CD5C5C;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .control-btn:hover {
+            background: #B22222;
+        }
+
+        .speed-label {
+            color: #f5f0e8;
+            font-size: 0.85rem;
+        }
+
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #0f0;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            border-radius: 5px;
+            z-index: 9999;
+        }
+
+        @media (max-width: 768px) {
+            .bilingual {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .zh {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-right: 0;
+                padding-bottom: 15px;
+            }
+            .en {
+                padding-left: 0;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .control-panel {
+                width: 90%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-container" id="scrollContainer">
+        <div class="content-wrapper">
+            <div class="hero">
+                <h1>中国传统雕版印刷</h1>
+                <h2>Traditional Chinese Woodblock Printing</h2>
+            </div>
+
+            <div class="section">
+                <h3><span class="emoji-icon">🧾</span>工艺与历史 / Technique and Historical Context</h3>
+                <div class="bilingual">
+                    <div class="zh">
+                        <p>中国传统雕版印刷是一项具有千年以上历史的工艺，通过在木板上雕刻图文，并采用凸版印刷方式将图像转印于纸张，实现信息与图像的复制与传播。</p>
+                        <p style="margin-top: 12px;">该技艺相关项目于2006年入选中国首批国家级非物质文化遗产名录，随后于2009年被联合国教科文组织列入"人类非物质文化遗产代表作名录"，体现其在全球文化体系中的重要地位。</p>
+                    </div>
+                    <div class="en">
+                        <p>Traditional Chinese woodblock printing is a technique with a history of over a thousand years. It involves carving text and images into wooden blocks and transferring ink onto paper through relief printing.</p>
+                        <p style="margin-top: 12px;">Related engraving and printing techniques were inscribed on China's first list of National Intangible Cultural Heritage in 2006, and in 2009 the China engraved block printing technique was included on UNESCO's Representative List of the Intangible Cultural Heritage of Humanity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="emoji-icon">⚖️</span>文化表达 (TCEs) / Traditional Cultural Expressions</h3>
+                <div class="bilingual">
+                    <div class="zh">
+                        <p>雕版印刷中的图案、符号与构图，构成了"传统文化表现形式"(Traditional Cultural Expressions, TCEs)的重要组成部分。这些元素通常由群体在长期实践中形成，并通过代际传承延续，体现出集体性与文化连续性。</p>
+                    </div>
+                    <div class="en">
+                        <p>The motifs, symbols, and compositions found in woodblock printing form an integral part of Traditional Cultural Expressions (TCEs). These elements are developed collectively over time and transmitted across generations, reflecting shared cultural identity and continuity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="emoji-icon">🏛️</span>商业功能与品牌雏形 / Commercial Function and Early Branding</h3>
+                <div class="bilingual">
+                    <div class="zh">
+                        <p>在中国古代商业实践中，雕版亦被用于商号经营。商家通过雕刻固定的字号、图案及吉祥符号，并反复印制于商品包装、票据及广告载体上，以标识商品来源并建立市场信誉。这种稳定且持续使用的视觉标识，在功能上已具备现代商标的基本特征。</p>
+                    </div>
+                    <div class="en">
+                        <p>In pre-modern China, woodblocks were also used in commercial activities. Merchants carved consistent shop names, motifs, and auspicious symbols, which were repeatedly printed on packaging, receipts, and promotional materials to identify source of goods and build market reputation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="emoji-icon">🔗</span>知识产权视角 / Intellectual Property Perspective</h3>
+                <div class="bilingual">
+                    <div class="zh">
+                        <p>从当代知识产权视角看，雕版印刷体现了从"传统文化表达"向"商业标识"的功能演进路径。尽管其产生于现代商标制度确立之前，但在区分商品来源、传递商誉及强化品牌认知方面，已与现代商标制度形成实质性功能对应关系。</p>
+                    </div>
+                    <div class="en">
+                        <p>From a contemporary intellectual property perspective, woodblock printing illustrates a historical transition from traditional cultural expressions to commercial source identifiers, demonstrating functional equivalence in distinguishing goods and conveying goodwill.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="emoji-icon">🎨</span>当代延续与创新 / Contemporary Adaptation</h3>
+                <div class="bilingual">
+                    <div class="zh">
+                        <p>当代雕版创作在延续传统技艺的基础上，融入现代语言与文化表达。例如"马上暴富""马到成功""马上幸福"等设计，通过"马"与"马上"的谐音表达即时祝愿，结合生肖文化，体现传统文化在当代语境中的创新与活化。</p>
+                    </div>
+                    <div class="en">
+                        <p>Contemporary woodblock works continue traditional techniques while incorporating modern expressions and cultural references. Designs employing phonetic wordplay between "horse" and "immediately," often linked to zodiac themes, demonstrate the ongoing evolution of traditional culture.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section key-statement">
+                <p><span class="emoji-icon">🧩</span>雕版印刷不仅是文化遗产，也是中国早期商业标识与品牌体系的重要载体。</p>
+                <p style="font-style: italic; font-weight: normal; margin-top: 10px; font-size: 0.95rem;">Woodblock printing is not only a form of cultural heritage, but also an early carrier of commercial identity and branding in China.</p>
+            </div>
+
+            <div class="section">
+                <h3><span class="emoji-icon">🧧</span>展示介绍 / Display Introduction</h3>
+                <div class="bilingual">
+                    <div class="zh">
+                        <p>本所于上海收藏有超过三千块原始雕版，涵盖丰富的历史题材与文化内容。本次展出的部分作品选自《西游记》系列，体现了中国古典文学与民间艺术的结合。</p>
+                        <p style="margin-top: 10px;">其中，"一团和气""和合"等图案，体现了中国传统"和文化"的核心理念；"天行健，君子以自强不息"则源自经典典籍，强调自我奋进的精神。</p>
+                        <p style="margin-top: 10px;">所有作品均采用宣纸印制，延续传统材料与工艺。</p>
+                    </div>
+                    <div class="en">
+                        <p>This collection features over 3,000 original woodblocks maintained in Shanghai, covering a wide range of historical and cultural themes. Selected works from the "Journey to the West" series demonstrate the integration of classical Chinese literature and folk art.</p>
+                        <p style="margin-top: 10px;">All works are printed on Xuan paper, maintaining traditional materials and craftsmanship.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="emoji-icon">🖼️</span>作品展示 / Gallery</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="pics- introduction/一团和气.jpeg" alt="一团和气">
+                        <div class="gallery-item-content">
+                            <h5>一团和气 / Harmony</h5>
+                            <p class="zh-intro">"一团和气"是中国传统吉祥图案，象征和谐、团结与友善。图案中的圆形构图寓意圆满完整，体现了中国传统文化中"以和为贵"的核心理念，常用于祈愿家庭和睦、社会和谐。</p>
+                            <p class="en-intro">"A Ball of Harmony" is a traditional Chinese auspicious motif symbolizing harmony, unity, and friendliness. The circular composition represents completeness and wholeness, embodying core Chinese philosophy that "harmony is precious."</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="pics- introduction/仙鹤.jpeg" alt="仙鹤">
+                        <div class="gallery-item-content">
+                            <h5>仙鹤 / Immortal Crane</h5>
+                            <p class="zh-intro">仙鹤在中国传统文化中是长寿与吉祥的象征，常被称为"仙禽"。鹤的优雅姿态和洁白羽毛代表纯洁与高尚品格，其"松鹤延年"的意象更是表达了人们对健康长寿的美好祝愿。</p>
+                            <p class="en-intro">The crane is a symbol of longevity and auspiciousness in traditional Chinese culture, often referred to as the "immortal bird." The crane's elegant posture and pure white plumage represent purity and noble character.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="pics- introduction/千里江山图.jpeg" alt="千里江山图">
+                        <div class="gallery-item-content">
+                            <h5>千里江山图 / A Thousand Miles of Rivers and Mountains</h5>
+                            <p class="zh-intro">此作灵感源自北宋王希孟传世名画《千里江山图》，展现壮丽的中国山水风貌。雕版作品以精湛技艺重现原画的青绿山水意境，体现了中国传统艺术对自然山水的崇尚与热爱。</p>
+                            <p class="en-intro">Inspired by the masterpiece by Wang Ximeng of the Northern Song Dynasty, this woodblock piece recreates the blue-green landscape artistic conception with exquisite craftsmanship, reflecting traditional Chinese art's reverence for natural landscapes.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="pics- introduction/哪吒和太极.jpeg" alt="哪吒和太极">
+                        <div class="gallery-item-content">
+                            <h5>哪吒与太极 / Nezha and Tai Chi</h5>
+                            <p class="zh-intro">哪吒是中国神话传说中的少年英雄，象征着勇敢与正义；太极则是道家哲学的核心概念，代表阴阳调和、天地和谐。两者结合体现了中国传统文化中英雄主义与哲学思辨的完美融合。</p>
+                            <p class="en-intro">Nezha is a young hero in Chinese mythology, symbolizing bravery and justice; Tai Chi represents the harmony of yin and yang. Their combination reflects the perfect integration of heroism and philosophical contemplation in traditional Chinese culture.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="pics- introduction/西游记-唐僧-八戒-沙僧.jpeg" alt="西游记-唐僧-八戒-沙僧">
+                        <div class="gallery-item-content">
+                            <h5>西游记·取经团队 / Journey to the West</h5>
+                            <p class="zh-intro">唐僧、猪八戒、沙僧与孙悟空共同组成《西游记》取经团队，历经九九八十一难最终修成正果。故事寓意人生修行需历经磨难、团结协作方能成就大业，是中国古典文学中最具影响力的神话传说之一。</p>
+                            <p class="en-intro">The pilgrimage team overcomes eighty-one tribulations before achieving enlightenment. The story implies that life's cultivation requires enduring hardships and working together to accomplish great deeds.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="pics- introduction/西游记-孙悟空.jpeg" alt="西游记-孙悟空">
+                        <div class="gallery-item-content">
+                            <h5>孙悟空 / Sun Wukong</h5>
+                            <p class="zh-intro">孙悟空，又称美猴王，是中国神话中最具传奇色彩的英雄形象之一。他拥有七十二般变化、筋斗云等神奇能力，象征着智慧、勇敢和不屈不挠的精神，是中国文化中反抗权威、追求自由的象征。</p>
+                            <p class="en-intro">Sun Wukong, also known as Monkey King, possesses magical abilities such as seventy-two transformations and somersault clouds, symbolizing wisdom, courage, and the spirit of perseverance.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="pics- introduction/西游记-白骨精.jpeg" alt="西游记-白骨精">
+                        <div class="gallery-item-content">
+                            <h5>白骨精 / White Bone Spirit</h5>
+                            <p class="zh-intro">白骨精是《西游记》中的经典反派形象，以欺骗和伪装著称。她三次变身迷惑唐僧师徒，最终被孙悟空识破消灭。这个故事警示人们要明辨是非、识破虚假表象，是中国民间故事中最广为人知的情节之一。</p>
+                            <p class="en-intro">The White Bone Spirit transformed three times to confuse Tang Monk and his disciples, but was eventually identified and destroyed by Sun Wukong. This story warns people to distinguish right from wrong and see through false appearances.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>段和段（南京）律师事务所 | Duan & Duan (Nanjing) Law Firm</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="debug-info" id="debugInfo">
+        调试信息加载中...
+    </div>
+
+    <div class="control-panel">
+        <button class="control-btn" id="pauseBtn">暂停</button>
+        <span class="speed-label">速度:</span>
+        <button class="control-btn" id="slowBtn">慢</button>
+        <button class="control-btn" id="normalBtn">中</button>
+        <button class="control-btn" id="fastBtn">快</button>
+    </div>
+
+    <script>
+        // 调试信息
+        const debugInfo = document.getElementById('debugInfo');
+
+        function updateDebug(message) {
+            debugInfo.innerHTML = message;
+            console.log(message);
+        }
+
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDebug('DOM已加载，正在初始化...');
+
+            const scrollContainer = document.getElementById('scrollContainer');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const slowBtn = document.getElementById('slowBtn');
+            const normalBtn = document.getElementById('normalBtn');
+            const fastBtn = document.getElementById('fastBtn');
+
+            // 验证元素是否存在
+            if (!scrollContainer) {
+                updateDebug('错误: 找不到scrollContainer');
+                return;
+            }
+            if (!pauseBtn) {
+                updateDebug('错误: 找不到pauseBtn');
+                return;
+            }
+
+            updateDebug('元素已找到，开始滚动...');
+
+            let isPaused = false;
+            let speed = 1;
+            let scrollInterval = null;
+
+            const speeds = {
+                slow: 0.5,
+                normal: 1,
+                fast: 2
+            };
+
+            // 开始滚动
+            function startScrolling() {
+                if (scrollInterval) {
+                    clearInterval(scrollInterval);
+                }
+
+                scrollInterval = setInterval(() => {
+                    if (!isPaused) {
+                        const scrollAmount = 1 * speed;
+                        const scrollTop = scrollContainer.scrollTop;
+                        const scrollHeight = scrollContainer.scrollHeight;
+                        const clientHeight = scrollContainer.clientHeight;
+                        const maxScroll = scrollHeight - clientHeight;
+
+                        scrollContainer.scrollTop = scrollTop + scrollAmount;
+
+                        // 更新调试信息
+                        const progress = Math.round((scrollTop / maxScroll) * 100);
+                        updateDebug(`滚动中... 进度: ${progress}% | 速度: ${speed}x | 暂停: ${isPaused}`);
+
+                        // 如果滚动到底部，重置到顶部
+                        if (scrollTop >= maxScroll - 5) {
+                            scrollContainer.scrollTop = 0;
+                        }
+                    }
+                }, 30); // 每30毫秒滚动一次
+            }
+
+            // 启动滚动
+            startScrolling();
+
+            // 控制按钮
+            pauseBtn.addEventListener('click', () => {
+                isPaused = !isPaused;
+                pauseBtn.textContent = isPaused ? '播放' : '暂停';
+                updateDebug(isPaused ? '已暂停' : '继续滚动');
+            });
+
+            slowBtn.addEventListener('click', () => {
+                speed = speeds.slow;
+                updateDebug(`速度设置为: 慢 (${speed}x)`);
+            });
+
+            normalBtn.addEventListener('click', () => {
+                speed = speeds.normal;
+                updateDebug(`速度设置为: 中 (${speed}x)`);
+            });
+
+            fastBtn.addEventListener('click', () => {
+                speed = speeds.fast;
+                updateDebug(`速度设置为: 快 (${speed}x)`);
+            });
+
+            // 触摸事件
+            let touchTimer;
+            scrollContainer.addEventListener('touchstart', () => {
+                isPaused = true;
+                pauseBtn.textContent = '播放';
+                clearTimeout(touchTimer);
+                updateDebug('触摸暂停');
+            });
+
+            scrollContainer.addEventListener('touchend', () => {
+                touchTimer = setTimeout(() => {
+                    isPaused = false;
+                    pauseBtn.textContent = '暂停';
+                    updateDebug('触摸结束，3秒后恢复');
+                }, 3000);
+            });
+
+            // 手动滚动时暂停
+            let manualScrollTimeout;
+            scrollContainer.addEventListener('scroll', () => {
+                isPaused = true;
+                pauseBtn.textContent = '播放';
+                clearTimeout(manualScrollTimeout);
+                updateDebug('手动滚动暂停');
+                manualScrollTimeout = setTimeout(() => {
+                    isPaused = false;
+                    pauseBtn.textContent = '暂停';
+                    updateDebug('5秒后恢复');
+                }, 5000);
+            });
+
+            updateDebug('✓ 自动滚动已启动！');
+        });
+    </script>
+</body>
+</html>
