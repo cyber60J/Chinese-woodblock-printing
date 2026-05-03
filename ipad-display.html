@@ -542,17 +542,6 @@
             }, 3000);
         });
 
-        // 鼠标悬停时暂停
-        scrollContainer.addEventListener('mouseenter', () => {
-            isPaused = true;
-            pauseBtn.textContent = '播放';
-        });
-
-        scrollContainer.addEventListener('mouseleave', () => {
-            isPaused = false;
-            pauseBtn.textContent = '暂停';
-        });
-
         // 手动滚动时暂停
         let manualScrollTimeout;
         scrollContainer.addEventListener('scroll', () => {
