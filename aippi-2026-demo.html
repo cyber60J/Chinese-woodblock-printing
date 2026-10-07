@@ -305,6 +305,46 @@
             .gallery-item { transition: none; }
             .gallery-item:hover { transform: none; }
         }
+        .footer { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+        .playback-controls {
+            position: fixed;
+            z-index: 10;
+            left: 50%;
+            bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+            transform: translateX(-50%);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: max-content;
+            max-width: calc(100% - 24px);
+            padding: 12px 16px;
+            border: 1px solid #dcc9b4;
+            border-radius: 8px;
+            background: #fff8f0;
+            box-shadow: 0 3px 16px rgba(44,24,16,.2);
+            font-size: .9rem;
+        }
+        .playback-controls[hidden] { display: none; }
+        .playback-controls label { display: flex; align-items: center; gap: 8px; }
+        .playback-controls button, .playback-controls select {
+            min-height: 44px;
+            padding: 8px 12px;
+            border: 1px solid #b88967;
+            border-radius: 4px;
+            background: #fff;
+            color: #8b0000;
+            font: inherit;
+            cursor: pointer;
+        }
+        .playback-controls button:focus-visible, .playback-controls select:focus-visible {
+            outline: 3px solid #b86a22;
+            outline-offset: 3px;
+        }
+        @media (max-width: 600px) {
+            .footer { padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)); }
+        }
 </style>
 </head>
 <body>
@@ -446,5 +486,121 @@
         <p>段和段律师事务所 | <span lang="en">Duan & Duan Law Firm</span></p>
         <p>2026 AIPPI · 中国印刷文化体验 | <span lang="en">A Chinese Printing Experience</span></p>
     </footer>
+    <div class="playback-controls" role="group" aria-label="自动循环展示 / Automatic scrolling" hidden>
+        <button id="playback-toggle" type="button" aria-pressed="false">暂停 / Pause</button>
+        <label for="playback-speed">速度 / Speed
+            <select id="playback-speed">
+                <option value="18">慢 / Slow</option>
+                <option value="28" selected>中 / Normal</option>
+                <option value="45">快 / Fast</option>
+            </select>
+        </label>
+    </div>
+    <script>
+        (() => {
+            const controls = document.querySelector('.playback-controls');
+            const toggle = document.getElementById('playback-toggle');
+            const speedSelect = document.getElementById('playback-speed');
+            const activePointers = new Set();
+            let activeTouches = 0;
+            let paused = false;
+            let speed = Number(speedSelect.value);
+            let position = window.scrollY;
+            let previousTime = null;
+            let resumeAt = performance.now() + 4000;
+            let bottomUntil = 0;
+            let syncPosition = true;
+
+            controls.hidden = false;
+
+            function holdForReading() {
+                resumeAt = performance.now() + 10000;
+                bottomUntil = 0;
+                syncPosition = true;
+            }
+
+            toggle.addEventListener('click', () => {
+                paused = !paused;
+                toggle.textContent = paused ? '继续 / Play' : '暂停 / Pause';
+                toggle.setAttribute('aria-pressed', String(paused));
+                resumeAt = performance.now() + 1000;
+                bottomUntil = 0;
+                syncPosition = true;
+            });
+
+            speedSelect.addEventListener('change', () => {
+                speed = Number(speedSelect.value);
+            });
+
+            document.addEventListener('pointerdown', (event) => {
+                if (event.target.closest('.playback-controls')) return;
+                activePointers.add(event.pointerId);
+                holdForReading();
+            }, { passive: true });
+
+            function releasePointer(event) {
+                if (activePointers.delete(event.pointerId)) holdForReading();
+            }
+            document.addEventListener('pointerup', releasePointer, { passive: true });
+            document.addEventListener('pointercancel', releasePointer, { passive: true });
+            document.addEventListener('touchstart', (event) => {
+                if (event.target.closest('.playback-controls')) return;
+                activeTouches = event.touches.length;
+                holdForReading();
+            }, { passive: true });
+            function updateTouches(event) {
+                if (activeTouches === 0) return;
+                activeTouches = event.touches.length;
+                holdForReading();
+            }
+            document.addEventListener('touchmove', updateTouches, { passive: true });
+            document.addEventListener('touchend', updateTouches, { passive: true });
+            document.addEventListener('touchcancel', updateTouches, { passive: true });
+            document.addEventListener('wheel', holdForReading, { passive: true });
+            document.addEventListener('keydown', (event) => {
+                if (event.target.closest('select, input, textarea')) return;
+                if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
+                    holdForReading();
+                }
+            });
+            document.addEventListener('toggle', holdForReading, true);
+            window.addEventListener('hashchange', holdForReading);
+            window.addEventListener('resize', holdForReading);
+            document.addEventListener('visibilitychange', () => {
+                previousTime = null;
+                syncPosition = true;
+                activePointers.clear();
+                activeTouches = 0;
+                if (!document.hidden) resumeAt = performance.now() + 4000;
+            });
+
+            function advance(time) {
+                const elapsed = previousTime === null ? 0 : Math.min((time - previousTime) / 1000, .1);
+                previousTime = time;
+                if (!paused && !document.hidden && activePointers.size === 0 && activeTouches === 0 && time >= resumeAt) {
+                    const maximum = Math.max(0, document.scrollingElement.scrollHeight - window.innerHeight);
+                    if (syncPosition) {
+                        position = Math.max(0, Math.min(window.scrollY, maximum));
+                        syncPosition = false;
+                    }
+                    if (maximum > 0 && position < maximum - 2) {
+                        bottomUntil = 0;
+                        // Retain fractional pixels so slow playback also advances on Safari.
+                        position = Math.min(maximum, position + speed * elapsed);
+                        window.scrollTo(0, position);
+                    } else if (maximum > 0 && !bottomUntil) {
+                        bottomUntil = time + 4000;
+                    } else if (maximum > 0 && time >= bottomUntil) {
+                        window.scrollTo(0, 0);
+                        position = 0;
+                        bottomUntil = 0;
+                        resumeAt = time + 4000;
+                    }
+                }
+                requestAnimationFrame(advance);
+            }
+            requestAnimationFrame(advance);
+        })();
+    </script>
 </body>
 </html>
