@@ -1,6 +1,14 @@
 # Chinese-woodblock-printing
 Chinese woodblock printing
 
+## 下一次展会直接复用
+
+- [展会网页工作流与现场检查清单](docs/EXHIBITION-WORKFLOW.md)
+- [2026 AIPPI 日志、发布记录和滚动问题复盘](docs/exhibitions/2026-10-07-aippi.md)
+- [正式展示网址](https://cyber60j.github.io/Chinese-woodblock-printing/)
+
+按工作流提供展会名称、每组雕版图/印样、故事及是否可以上手印制，即可沿用当前双语页面和 iPad 自动循环展示。之后的展会另建记录，保留本次基线。
+
 ## 展示页播放检查
 
 正式入口为 `index.html`，本地演示为 `aippi-2026-demo.html`，两者使用同一套播放逻辑。
