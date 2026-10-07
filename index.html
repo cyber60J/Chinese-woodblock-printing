@@ -305,7 +305,7 @@
             .gallery-item { transition: none; }
             .gallery-item:hover { transform: none; }
         }
-        .footer { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+        .footer { padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)); }
         .playback-controls {
             position: fixed;
             z-index: 10;
@@ -327,9 +327,28 @@
             font-size: .9rem;
         }
         .playback-controls[hidden] { display: none; }
+        .playback-status {
+            flex-basis: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #765021;
+            font-weight: 700;
+        }
+        .playback-status::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            flex: 0 0 12px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .playback-controls[data-playback-state="playing"] .playback-status { color: #25633b; }
+        .playback-controls[data-playback-state="paused"] .playback-status { color: #8b0000; }
         .playback-controls label { display: flex; align-items: center; gap: 8px; }
         .playback-controls button, .playback-controls select {
-            min-height: 44px;
+            min-height: 52px;
             padding: 8px 12px;
             border: 1px solid #b88967;
             border-radius: 4px;
@@ -337,13 +356,16 @@
             color: #8b0000;
             font: inherit;
             cursor: pointer;
+            touch-action: manipulation;
         }
+        .playback-controls button { min-width: 150px; background: #8b0000; color: #fff; font-weight: 700; }
+        .playback-controls button:active { background: #570000; }
         .playback-controls button:focus-visible, .playback-controls select:focus-visible {
             outline: 3px solid #b86a22;
             outline-offset: 3px;
         }
         @media (max-width: 600px) {
-            .footer { padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)); }
+            .footer { padding-bottom: calc(240px + env(safe-area-inset-bottom, 0px)); }
         }
 </style>
 </head>
@@ -487,6 +509,10 @@
         <p>2026 AIPPI · 中国印刷文化体验 | <span lang="en">A Chinese Printing Experience</span></p>
     </footer>
     <div class="playback-controls" role="group" aria-label="自动循环展示 / Automatic scrolling" hidden>
+        <div class="playback-status">
+            <span id="playback-status-text" role="status" aria-live="polite">即将播放 / Starting</span>
+            <span id="playback-countdown" aria-hidden="true"></span>
+        </div>
         <button id="playback-toggle" type="button" aria-pressed="false">暂停 / Pause</button>
         <label for="playback-speed">速度 / Speed
             <select id="playback-speed">
@@ -501,6 +527,8 @@
             const controls = document.querySelector('.playback-controls');
             const toggle = document.getElementById('playback-toggle');
             const speedSelect = document.getElementById('playback-speed');
+            const statusText = document.getElementById('playback-status-text');
+            const countdown = document.getElementById('playback-countdown');
             const activePointers = new Set();
             let activeTouches = 0;
             let paused = false;
@@ -510,22 +538,74 @@
             let resumeAt = performance.now() + 4000;
             let bottomUntil = 0;
             let syncPosition = true;
+            let waitReason = 'starting';
+            let viewportWidth = window.innerWidth;
+            let displayedState = '';
+            let displayedCountdown = '';
 
             controls.hidden = false;
+
+            function showStatus(time) {
+                let state = 'playing';
+                let remaining = '';
+                if (paused) {
+                    state = 'paused';
+                } else if (document.hidden) {
+                    state = 'hidden';
+                } else if (activePointers.size > 0 || activeTouches > 0) {
+                    state = 'reading';
+                } else if (time < resumeAt) {
+                    state = waitReason;
+                    remaining = Math.ceil((resumeAt - time) / 1000) + 's';
+                } else if (bottomUntil > time) {
+                    state = 'bottom';
+                    remaining = Math.ceil((bottomUntil - time) / 1000) + 's';
+                }
+                if (state !== displayedState) {
+                    const labels = {
+                        playing: '正在播放 / Playing',
+                        paused: '已暂停 / Paused',
+                        starting: '即将播放 / Starting',
+                        reading: '手动阅读 / Reading',
+                        bottom: '本轮结束 / End of cycle',
+                        hidden: '后台暂停 / In background'
+                    };
+                    statusText.textContent = labels[state];
+                    controls.setAttribute('data-playback-state', state);
+                    displayedState = state;
+                }
+                if (remaining !== displayedCountdown) {
+                    countdown.textContent = remaining;
+                    displayedCountdown = remaining;
+                }
+            }
 
             function holdForReading() {
                 resumeAt = performance.now() + 10000;
                 bottomUntil = 0;
                 syncPosition = true;
+                waitReason = 'reading';
+                showStatus(performance.now());
             }
 
+            // A single native click handles touch, mouse and keyboard without double toggles.
             toggle.addEventListener('click', () => {
                 paused = !paused;
                 toggle.textContent = paused ? '继续 / Play' : '暂停 / Pause';
                 toggle.setAttribute('aria-pressed', String(paused));
-                resumeAt = performance.now() + 1000;
+                // An explicit Play overrides reading delays and stale touch/pointer records.
+                activePointers.clear();
+                activeTouches = 0;
+                resumeAt = performance.now();
+                previousTime = resumeAt;
                 bottomUntil = 0;
                 syncPosition = true;
+                const maximum = Math.max(0, document.scrollingElement.scrollHeight - window.innerHeight);
+                if (!paused && maximum > 0 && window.scrollY >= maximum - 2) {
+                    window.scrollTo(0, 0);
+                    position = 0;
+                }
+                showStatus(resumeAt);
             });
 
             speedSelect.addEventListener('change', () => {
@@ -565,13 +645,26 @@
             });
             document.addEventListener('toggle', holdForReading, true);
             window.addEventListener('hashchange', holdForReading);
-            window.addEventListener('resize', holdForReading);
+            window.addEventListener('resize', () => {
+                // Safari's changing toolbar height must not restart the reading delay.
+                // Keep fractional progress on height-only changes, including at slow speed.
+                const maximum = Math.max(0, document.scrollingElement.scrollHeight - window.innerHeight);
+                if (window.innerWidth !== viewportWidth) {
+                    syncPosition = true;
+                    viewportWidth = window.innerWidth;
+                }
+                position = Math.max(0, Math.min(position, maximum));
+            });
             document.addEventListener('visibilitychange', () => {
                 previousTime = null;
                 syncPosition = true;
                 activePointers.clear();
                 activeTouches = 0;
-                if (!document.hidden) resumeAt = performance.now() + 4000;
+                if (!document.hidden && !paused) {
+                    resumeAt = performance.now() + 4000;
+                    waitReason = 'starting';
+                }
+                showStatus(performance.now());
             });
 
             function advance(time) {
@@ -595,10 +688,13 @@
                         position = 0;
                         bottomUntil = 0;
                         resumeAt = time + 4000;
+                        waitReason = 'starting';
                     }
                 }
+                showStatus(time);
                 requestAnimationFrame(advance);
             }
+            showStatus(performance.now());
             requestAnimationFrame(advance);
         })();
     </script>
