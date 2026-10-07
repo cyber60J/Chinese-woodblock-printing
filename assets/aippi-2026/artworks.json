@@ -1,0 +1,230 @@
+{
+  "event": "2026 AIPPI",
+  "artworks": [
+    {
+      "id": "01",
+      "user_supplied_name": "孔子",
+      "observed_title": "先師孔子行教像",
+      "identification_status": "用户已确认：孔子",
+      "block_image": "01-portrait/block-original.jpeg",
+      "print_image": "01-portrait/print-original.jpeg",
+      "story_status": "待用户补充",
+      "story": null,
+      "draft_copy": {
+        "title_zh": "先师孔子行教像",
+        "title_en": "Portrait of Confucius",
+        "description_zh": "这件作品以端庄的孔子形象，表达对先贤与教育的敬意。印样题有“先师孔子行教像”，并以“德侔天地，道冠古今；删述六经，垂宪万世”的文字颂扬其学问与德行。通过雕版印刷，人物形象与文字一同留在纸上，让知识传承成为可见、可分享的故事。",
+        "description_en": "This dignified portrait of Confucius honours learning and the passing on of knowledge. Its inscriptions praise his wisdom, virtue and lasting influence as a teacher. Printing brings the portrait and its words together on paper, giving this tribute a form that visitors can share."
+      },
+      "hands_on_printing": true,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "可上手自行印制"
+    },
+    {
+      "id": "02",
+      "user_supplied_name": "青花瓷",
+      "observed_text": "福",
+      "visual_description": "瓷瓶造型，双鱼环绕中央的福字，周围饰有花卉纹样。",
+      "identification_status": "用户已提供名称",
+      "block_image": "02-porcelain/block-original.jpeg",
+      "print_image": "02-porcelain/print-original.jpeg",
+      "story_status": "用户已提供寓意说明",
+      "story": "这一组是青花瓷，上面印着鱼，预示着年年有余，中间围绕着福，意味着福气。",
+      "story_summary": "鱼寓意年年有余，中央的福字寓意福气。",
+      "story_source": "用户说明",
+      "draft_copy": {
+        "title_zh": "青花瓷·双鱼纳福",
+        "title_en": "Porcelain Motif: Fish and Good Fortune",
+        "description_zh": "这件作品以瓷瓶为轮廓，双鱼环绕中央的“福”字，周围饰以花卉纹样。“鱼”与“余”谐音，寄托“年年有余”的祝愿；“福”字则代表福气与好运。两种吉祥意象相伴，表达生活丰足、福气常在的美好心愿。",
+        "description_en": "Within the outline of a porcelain vase, two fish surround the character fú (福), meaning good fortune or blessings. The Chinese words for fish and surplus share the pronunciation yú, so fish express a wish for abundance year after year. Together, the fish and fú offer wishes for a plentiful life and lasting good fortune."
+      },
+      "hands_on_printing": true,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "可上手自行印制"
+    },
+    {
+      "id": "03",
+      "user_supplied_name": "青龙与白虎",
+      "identification_status": "用户确认：青龙与白虎一对石雕；已收到对应展示效果照片",
+      "components": [
+        {
+          "name": "青龙",
+          "block_image": null,
+          "print_image": "03-dragon-tiger/dragon-print-original.jpeg"
+        },
+        {
+          "name": "白虎",
+          "block_image": null,
+          "print_image": "03-dragon-tiger/tiger-print-original.jpeg"
+        }
+      ],
+      "materials_status": "已收到两幅印刷效果图；尚未收到雕版本体照片",
+      "story_status": "用户已提供寓意和来源说明",
+      "story": "这两块雕版代表着中国非常重要的吉祥与神灵庇护的壁画，是典型的“左青龙，右白虎”，代表着保佑平安与成功。\n\n这两个壁画其实都出自古代佛教石刻上的壁画。其中左侧青龙的形状来自壁画当中的青龙，而右侧的白虎也是来自于古代壁画当中的白虎形象。",
+      "story_summary": "一对“左青龙，右白虎”题材作品，寓意神灵庇护、平安与成功。",
+      "story_source": "用户说明",
+      "origin_description": "古代佛教石刻上的壁画中的青龙与白虎形象",
+      "origin_source": "用户说明",
+      "origin_status": "具体遗址、年代和原图来源待补充，尚未独立核实",
+      "draft_copy": {
+        "title_zh": "青龙与白虎",
+        "title_en": "Azure Dragon and White Tiger",
+        "description_zh": "“左青龙，右白虎”呈现中国传统的守护意象。这一对作品以龙的盘曲姿态和虎的昂扬身形，寄托护佑、平安与成功的祝愿。青龙与白虎石刻图像在本次展览中成对展示，供来宾观赏。",
+        "description_en": "The Azure Dragon and White Tiger are traditional Chinese guardian symbols, often paired as the dragon on the left and the tiger on the right. Their flowing, energetic forms carry wishes for protection, peace and success. This pair of stone-carving images is displayed for viewing."
+      },
+      "hands_on_printing": false,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "石刻作品展示，仅供观赏",
+      "work_type": "石刻图像（用户确认）"
+    },
+    {
+      "id": "04",
+      "user_supplied_name": "中国龙",
+      "proposed_display_title": "中国龙·龙纹盖罐",
+      "visual_description": "有盖圆腹罐的轮廓中饰有盘曲的龙，龙身带鳞片，周围配有卷曲纹饰。",
+      "identification_status": "用户提供主题：中国龙；盖罐器形与龙身形态为图像观察",
+      "block_image": "04-dragon-jar/block-original.jpeg",
+      "print_image": "04-dragon-jar/print-original.jpeg",
+      "user_description": "有中国特色的龙",
+      "story_status": "按用户要求检索并补充文化背景，已整理中英文展示文案草稿",
+      "story": "中国艺术中的龙有护佑、幸福等文化含义，并与江河湖泊等水域相关；龙纹是陶瓷的传统装饰题材。",
+      "story_source": "故宫博物院及大都会艺术博物馆资料；本件器形和视觉形态依据用户照片",
+      "draft_copy": {
+        "title_zh": "中国龙·龙纹盖罐",
+        "title_en": "Chinese Dragon on a Covered Jar",
+        "description_zh": "这件作品以有盖罐为外形，将一条盘曲的中国龙融入器身装饰。龙在中国传统文化中是祥瑞的象征，常与护佑、幸福以及江河湖泊等水域相联系。龙纹也是中国陶瓷的传统装饰题材。盘曲的龙身与繁密的纹饰相结合，呈现出鲜明的动势。",
+        "description_en": "This woodblock print depicts a coiling Chinese dragon within the outline of a covered jar. In Chinese tradition, dragons are auspicious creatures associated with protection, happiness and water. Dragon motifs are also a familiar feature of Chinese ceramics. The winding body and richly patterned decoration give the image a lively sense of movement."
+      },
+      "research_sources": [
+        {
+          "title": "故宫博物院：龙纹",
+          "url": "https://www.dpm.org.cn/lemmas/243642.html",
+          "supports": "龙纹作为陶瓷装饰题材及其多种形态",
+          "checked_on": "2026-10-07"
+        },
+        {
+          "title": "The Metropolitan Museum of Art: Vase with Dragon amid Clouds",
+          "url": "https://www.metmuseum.org/art/collection/search/42364",
+          "supports": "龙的一般文化含义：护佑、幸福及与水域的关联",
+          "checked_on": "2026-10-07"
+        }
+      ],
+      "origin_status": "本件雕版的年代、作者和具体器物原型尚未确认；检索资料仅支持一般文化背景",
+      "hands_on_printing": true,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "可上手自行印制"
+    },
+    {
+      "id": "05",
+      "user_supplied_name": "马上幸福",
+      "identification_status": "名称依据印样中文文字识读",
+      "printing_method": "滚轴操作",
+      "printing_method_source": "用户说明",
+      "block_image": null,
+      "print_image": "05-instant-happiness/print-original.jpeg",
+      "materials_status": "已收到印刷效果图",
+      "observed_text": [
+        "马上幸福",
+        "福",
+        "大吉大利",
+        "GOOD LUCK",
+        "HAPPY NEW YEAR"
+      ],
+      "visual_description": "马与菱形福字，下方为马上幸福及新年祝福文字。",
+      "story_status": "已阅读印样并整理中英文介绍",
+      "story": "马与福字共同表达幸福和好运的祝愿。马上既指立即，也可按字面理解为在马背上，形成图文双关，寓意幸福即刻到来。",
+      "story_source": "根据印样文字、图案及中文词义整理；未添加具体历史出处",
+      "draft_copy": {
+        "title_zh": "马上幸福",
+        "title_en": "Happiness, Right Away!",
+        "description_zh": "马与福字共同表达幸福和好运的祝愿。马上既指立即，也可按字面理解为在马背上，形成图文双关，寓意幸福即刻到来。",
+        "description_en": "The horse and the Chinese character fú (福), meaning good fortune or blessings, offer a wish for happiness and good luck. Mǎshàng means both “right away” and “on horseback,” creating a playful wish for happiness to arrive without delay."
+      },
+      "hands_on_printing": true,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "滚轴操作，自行印制"
+    },
+    {
+      "id": "06",
+      "user_supplied_name": "马到成功",
+      "identification_status": "名称依据印样中文文字识读",
+      "printing_method": "滚轴操作",
+      "printing_method_source": "用户说明",
+      "block_image": null,
+      "print_image": "06-swift-success/print-original.jpeg",
+      "materials_status": "已收到印刷效果图",
+      "observed_text": [
+        "马到成功",
+        "GOOD LUCK"
+      ],
+      "visual_description": "一匹昂首抬腿的马，上方为马到成功和GOOD LUCK。",
+      "story_status": "已阅读印样并整理中英文介绍",
+      "story": "马到成功是祝愿迅速取得成功的成语，字面意为马一到便成功。画中的马寄托对新事业、新目标顺利成功的祝福。",
+      "story_source": "根据印样文字、图案及中文词义整理；未添加具体历史出处",
+      "draft_copy": {
+        "title_zh": "马到成功",
+        "title_en": "Swift Success",
+        "description_zh": "马到成功是祝愿迅速取得成功的成语，字面意为马一到便成功。画中的马寄托对新事业、新目标顺利成功的祝福。",
+        "description_en": "Mǎ dào chéng gōng is a Chinese idiom meaning “swift success,” literally “success as soon as the horse arrives.” This spirited horse carries a wish for success in your next venture."
+      },
+      "hands_on_printing": true,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "滚轴操作，自行印制"
+    },
+    {
+      "id": "07",
+      "user_supplied_name": "马上暴富",
+      "identification_status": "名称依据印样中文文字识读",
+      "printing_method": "滚轴操作",
+      "printing_method_source": "用户说明",
+      "block_image": null,
+      "print_image": "07-instant-riches/print-original.jpeg",
+      "materials_status": "已收到印刷效果图",
+      "observed_text": [
+        "马上暴富",
+        "MA SHANG YOU QIAN"
+      ],
+      "visual_description": "马与钱币图案，上方为马上暴富。",
+      "story_status": "已阅读印样并整理中英文介绍",
+      "story": "马与钱币把马上的双重含义结合起来，幽默地表达迅速发财的祝愿。马上暴富是夸张而轻松的吉祥祝福。",
+      "story_source": "根据印样文字、图案及中文词义整理；未添加具体历史出处",
+      "draft_copy": {
+        "title_zh": "马上暴富",
+        "title_en": "Strike It Rich!",
+        "description_zh": "马与钱币把马上的双重含义结合起来，幽默地表达迅速发财的祝愿。马上暴富是夸张而轻松的吉祥祝福。",
+        "description_en": "The horse and coins turn the double meaning of mǎshàng—“right away” and “on horseback”—into a cheerful wish to strike it rich. This is a light-hearted blessing for wealth and prosperity!"
+      },
+      "inscription_note": "印样的中文标题为马上暴富，拼音MA SHANG YOU QIAN对应马上有钱；英文介绍按中文标题翻译。",
+      "hands_on_printing": true,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "滚轴操作，自行印制"
+    },
+    {
+      "id": "08",
+      "user_supplied_name": "保护知识产权就是保护创新",
+      "identification_status": "名称依据印样中文文字识读",
+      "printing_method": "滚轴操作",
+      "printing_method_source": "用户说明",
+      "block_image": null,
+      "print_image": "08-protect-innovation/print-original.jpeg",
+      "materials_status": "已收到印刷效果图",
+      "observed_text": [
+        "保护知识产权就是保护创新",
+        "Protect IP, protect innovation."
+      ],
+      "visual_description": "云纹边框内有盾牌与锁、文书、铅笔、灯泡、齿轮、上涨箭头、放大镜、书本及机器人。",
+      "story_status": "已阅读印样并整理中英文介绍",
+      "story": "盾牌与锁象征保护，灯泡、齿轮、书本和机器人表现创意、知识和技术。作品以保护知识产权就是保护创新为主题，致意让新想法成为现实的创造者。",
+      "story_source": "根据印样文字、图案及中文词义整理；未添加具体历史出处",
+      "draft_copy": {
+        "title_zh": "保护知识产权就是保护创新",
+        "title_en": "Protect IP, Protect Innovation",
+        "description_zh": "盾牌与锁象征保护，灯泡、齿轮、书本和机器人表现创意、知识和技术。作品以保护知识产权就是保护创新为主题，致意让新想法成为现实的创造者。",
+        "description_en": "Protecting intellectual property means protecting innovation. The shield and lock represent protection, while the light bulb, gears, books and robot evoke creativity, knowledge and technology. The design celebrates the people whose imagination and work bring new ideas to life."
+      },
+      "hands_on_printing": true,
+      "participation_source": "用户确认：除青龙白虎石雕一对外，其余作品均可上手自行印制",
+      "display_mode": "滚轴操作，自行印制"
+    }
+  ]
+}

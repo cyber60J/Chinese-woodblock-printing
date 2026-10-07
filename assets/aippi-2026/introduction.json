@@ -1,0 +1,78 @@
+{
+  "status": "approved_for_publication",
+  "event": "2026 AIPPI",
+  "title_zh": "印出中国故事",
+  "title_en": "Print a Chinese Story",
+  "subtitle_zh": "中国雕版印刷、文化祝愿与亲手体验",
+  "subtitle_en": "Chinese Woodblock Printing, Cultural Symbols and a Hands-on Experience",
+  "presenter_zh": "段和段律师事务所",
+  "presenter_en": "Duan & Duan Law Firm",
+  "sections": [
+    {
+      "id": "welcome",
+      "zh": "在2026 AIPPI，段和段律师事务所邀请您亲手体验印刷，让一个中国故事、一句美好祝愿，从版面走到纸上。",
+      "en": "At AIPPI 2026, Duan & Duan Law Firm invites you to try printing for yourself and discover the Chinese stories and good wishes behind each design.",
+      "sources": []
+    },
+    {
+      "id": "craft",
+      "zh": "中国雕版印刷已有一千多年的历史。传统工艺将文字与图案反向刻在木板上，保留凸起的印刷部分，再上墨、覆纸、施压，将图像转印到纸张。同一块雕版可以反复印制，让文字、图像与知识更广泛地传播。",
+      "en": "Chinese woodblock printing has a history of more than a thousand years. Artisans carve a design in reverse on a wooden block, leaving the printing surface raised. Ink is applied, paper is laid over the block, and pressure transfers the image. A single block can produce many impressions, helping texts, images and knowledge reach more people.",
+      "sources": [
+        "https://education.asianart.org/resources/the-invention-of-woodblock-printing-in-the-tang-and-song-dynasties/",
+        "https://ich.unesco.org/en/RL/china-engraved-block-printing-technique-00229"
+      ]
+    },
+    {
+      "id": "history",
+      "zh": "唐代868年的《金刚经》，是现存最早有明确纪年的完整印刷书。北宋毕昇发展了可拆分重排的泥活字，而雕版印刷仍长期延续。2009年，中国雕版印刷技艺列入联合国教科文组织人类非物质文化遗产代表作名录。",
+      "en": "The Diamond Sutra, dated 868 CE, is the earliest surviving complete printed book with an explicit date. In the Northern Song dynasty, Bi Sheng developed reusable clay movable type, while woodblock printing continued for centuries. In 2009, China’s engraved block printing technique was inscribed on UNESCO’s Representative List of the Intangible Cultural Heritage of Humanity.",
+      "sources": [
+        "https://idp.bl.uk/discover/learning/dunhuang/collection-items/cave-17-the-library-cave/",
+        "https://education.asianart.org/resources/the-invention-of-woodblock-printing-in-the-tang-and-song-dynasties/",
+        "https://ich.unesco.org/en/RL/china-engraved-block-printing-technique-00229"
+      ]
+    },
+    {
+      "id": "traditional-designs",
+      "zh": "这次作品将知识传承与文化祝愿放在一起：孔子的形象表达对教育与先贤的敬意；青花瓷纹样中的双鱼环绕福字，寓意年年有余、福气相伴；龙纹盖罐以盘曲的中国龙，传达祥瑞与护佑的文化意象。",
+      "en": "The designs bring learning and good wishes together. Confucius honours education and the passing on of knowledge. Two fish surrounding the character fú (福) express wishes for abundance year after year and good fortune: the Chinese words for fish and surplus share the same pronunciation, yú. A dragon-decorated covered jar carries associations of auspiciousness and protection.",
+      "sources": [
+        "https://whc.unesco.org/en/list/704",
+        "https://www.metmuseum.org/art/collection/search/42364"
+      ],
+      "user_grounding": "作品名称、福鱼寓意依据用户说明；孔子与中国龙的一般文化背景依据机构资料；鱼余词义为语言解释"
+    },
+    {
+      "id": "stone-pair",
+      "zh": "一对青龙与白虎石刻图像呈现传统守护意象：青龙对应东方，白虎对应西方。它们在本次展示中寄托平安与成功的祝愿，供来宾观赏。",
+      "en": "The Azure Dragon and White Tiger stone-carved images represent traditional guardians of the east and west. Displayed as a pair, they carry our wishes for protection, peace and success. These two works are for viewing.",
+      "sources": [
+        "https://artmuseum.princeton.edu/art/collections/objects/135925"
+      ],
+      "user_grounding": "石雕类型、平安与成功寓意及仅供展示的安排依据用户说明；方位文化背景依据博物馆资料"
+    },
+    {
+      "id": "roller-designs",
+      "zh": "四款滚轴作品加入当代趣味。“马上幸福”与“马上暴富”利用马上的双重含义——立即与在马背上——把祝福变成图文游戏；“马到成功”祝愿迅速成功、事业顺遂；“保护知识产权就是保护创新”则以盾牌、灯泡、书本和机器人，将传统印刷与今天的创意、知识和技术相联系。",
+      "en": "Four roller-operated designs add a contemporary touch. Happiness, Right Away! and Strike It Rich! play on mǎshàng, which means both right away and on horseback. Swift Success translates the wish expressed by mǎ dào chéng gōng. Protect IP, Protect Innovation uses a shield, light bulb, books and robot to connect printing with creativity, knowledge and technology today.",
+      "sources": [],
+      "user_grounding": "文字与图案依据印样；滚轴操作方式依据用户说明；双关及成语为语言解释"
+    },
+    {
+      "id": "participation",
+      "zh": "除青龙与白虎这一对石刻展示外，其余七款作品都可以上手自行印制。欢迎选择您喜欢的图案，体验图像从版面转印到纸张的过程，印下一份祝愿，也亲手感受印刷的乐趣。",
+      "en": "Apart from the Azure Dragon and White Tiger pair, all seven other designs are available for you to print yourself. Choose a design, watch its image transfer onto paper, and give a good wish a form of your own.",
+      "sources": [],
+      "user_grounding": "参与范围依据用户最新确认；不承诺未说明的收费、材料或带走安排"
+    }
+  ],
+  "review_notes": [
+    "青龙与白虎的具体石刻遗址、年代及原图来源待补充；正文仅采用已核实的传统守护背景。",
+    "孔子部分根据印样题字及通用教育文化背景整理，未推定本件雕版的年代或原型。",
+    "四款滚轴作品的参与方式依据用户说明，与传统木版工艺的历史介绍分开表述。"
+  ],
+  "history_verified_on": "2026-10-07",
+  "demo_status": "已制作本地演示页 aippi-2026-demo.html",
+  "website_entry": "index.html"
+}
