@@ -3,6 +3,7 @@
 此仓库用于段和段律师事务所的雕版展会展示。开始更新前，阅读 [展会工作流](docs/EXHIBITION-WORKFLOW.md) 及 `docs/exhibitions/` 中相关记录；本次可复用基线与故障复盘见 [2026 AIPPI 日志](docs/exhibitions/2026-10-07-aippi.md)。
 
 - 正式入口是 `index.html`。`aippi-2026-demo.html` 是当前演示页；两者播放脚本必须一致。旧 `ipad-display*.html` 已于 2026-10-08 按用户要求删除，需要时从 Git 历史取回。
+- 2026-10-08 已重写 Git 历史，删除未公开的 `pics- introduction/` 照片。开始工作前请重新克隆；不要从旧克隆推送、合并或恢复该文件夹。
 - 自动循环只在展台 iPad 使用 `?display=1` 网址时启动；访客扫码打开的普通网址不自动滚动。不要把自动循环改回默认开启。
 - 网页使用 `tools/prepare_images.py` 生成的拉直裁切图（`-full.jpeg`、`-1000.webp`、`-640.webp`、`-thumb.webp`），原图 `-original.jpeg` 保留不改。新增或更换照片时，在脚本中量取四角后重新生成。
 - 保留已有双语结构、大字体和作品卡片。展会名称、作品、参与方式及数量按新资料更新，不能把本次的八组、七款数字沿用为常量。
