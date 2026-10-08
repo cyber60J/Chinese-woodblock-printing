@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="段和段律师事务所2026 AIPPI中国印刷文化体验：认识雕版印刷历史、作品寓意，并亲手印制七款图案。">
     <title>印出中国故事 · 2026 AIPPI | Print a Chinese Story</title>
+    <meta name="theme-color" content="#8b0000">
+    <link rel="canonical" href="https://cyber60j.github.io/Chinese-woodblock-printing/">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="段和段律师事务所 Duan &amp; Duan Law Firm">
+    <meta property="og:title" content="印出中国故事 · Print a Chinese Story | AIPPI 2026">
+    <meta property="og:description" content="Duan &amp; Duan, Booth 50: discover Chinese woodblock printing and print a good wish yourself. 段和段律师事务所50号展位：认识雕版印刷，亲手印下一份祝愿。">
+    <meta property="og:url" content="https://cyber60j.github.io/Chinese-woodblock-printing/">
+    <meta property="og:image" content="https://cyber60j.github.io/Chinese-woodblock-printing/assets/aippi-2026/share.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="孔子像与“保护知识产权就是保护创新”雕版印样 / Woodblock prints of Confucius and Protect IP, Protect Innovation">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
         * {
             margin: 0;
@@ -272,7 +289,6 @@
         .block-photo summary { color: #8b0000; cursor: pointer; font-size: 1rem; min-height: 44px; padding: 8px 0; }
         .block-photo .work-image { margin-top: 12px; }
         .block-photo img { width: 100%; height: auto; max-height: 480px; object-fit: contain; }
-        .block-photo .rotate-180 { transform: rotate(180deg); }
         .gallery-note { color: #6c5b4f; font-size: 1rem; }
         .gallery-count { margin-top: 6px; }
         .reference-note { font-size: .95rem; color: #66584f; }
@@ -299,13 +315,14 @@
         }
         @media (max-width: 600px) {
             html { font-size: 18px; }
+            .event-label { letter-spacing: .04em; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             .gallery-item { transition: none; }
             .gallery-item:hover { transform: none; }
         }
-        .footer { padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)); }
+        .display-mode .footer { padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)); }
         .playback-controls {
             position: fixed;
             z-index: 10;
@@ -365,34 +382,111 @@
             outline-offset: 3px;
         }
         @media (max-width: 600px) {
-            .footer { padding-bottom: calc(240px + env(safe-area-inset-bottom, 0px)); }
+            .display-mode .footer { padding-bottom: calc(240px + env(safe-area-inset-bottom, 0px)); }
         }
+
+        /* Language switch for visitors' phones: both languages by default. */
+        .lang-switch { position: relative; z-index: 2; display: flex; justify-content: center; margin: 0 0 22px; border: 0; }
+        .lang-switch legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .lang-switch input { position: absolute; opacity: 0; pointer-events: none; }
+        .lang-switch label { min-width: 64px; min-height: 40px; padding: 6px 14px; border: 1px solid rgba(255,248,240,.65); color: #fff8f0; font-size: .85rem; line-height: 26px; cursor: pointer; }
+        .lang-switch label + input + label { border-left: 0; }
+        .lang-switch label:first-of-type { border-radius: 4px 0 0 4px; }
+        .lang-switch label:last-of-type { border-radius: 0 4px 4px 0; }
+        .lang-switch input:checked + label { background: #fff8f0; color: #8b0000; font-weight: 700; }
+        .lang-switch input:focus-visible + label { outline: 3px solid #f2c49b; outline-offset: 2px; }
+        .display-mode .lang-switch { display: none; }
+        @supports not selector(:has(*)) { .lang-switch { display: none; } }
+        body:has(#lang-zh:checked) [lang="en"],
+        body:has(#lang-en:checked) [lang="zh-CN"],
+        body:has(#lang-zh:checked) .sep,
+        body:has(#lang-en:checked) .sep,
+        body:has(#lang-en:checked) .bilingual > .zh,
+        body:has(#lang-zh:checked) .bilingual > .en,
+        body:has(#lang-zh:checked) .lang-br,
+        body:has(#lang-en:checked) .lang-br { display: none; }
+        body:has(#lang-zh:checked) .bilingual,
+        body:has(#lang-en:checked) .bilingual { grid-template-columns: 1fr; }
+        body:has(#lang-zh:checked) .bilingual > .zh { border: 0; padding: 0; }
+        body:has(#lang-en:checked) .bilingual > .en { padding: 0; }
+        body:has(#lang-en:checked) .gallery-item .work-title span { margin-top: 0; }
+
+        /* Overview strip of the works under the welcome text. */
+        .work-strip { position: relative; z-index: 1; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; max-width: 1000px; margin: 30px auto 0; padding: 0; list-style: none; }
+        .work-strip a { display: block; width: 88px; height: 88px; border: 2px solid rgba(255,248,240,.7); border-radius: 6px; overflow: hidden; background: #efe8dc; }
+        .work-strip a:hover { border-color: #fff8f0; }
+        .work-strip img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        @media (max-width: 960px) { .work-strip a { width: 76px; height: 76px; } }
+        @media (max-width: 600px) {
+            .work-strip { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-left: -22px; margin-right: -22px; padding: 0 22px 6px; scroll-padding-left: 22px; scroll-snap-type: x mandatory; }
+            .work-strip li { flex: 0 0 auto; scroll-snap-align: start; }
+            .work-strip a { width: 84px; height: 84px; }
+        }
+
+        /* How to print. */
+        .print-steps { margin-top: 28px; text-align: left; font-weight: normal; }
+        .print-steps h4 { color: #8b0000; font-size: 1.1rem; margin: 0 0 4px; }
+        .print-steps .method-note { color: #6c5b4f; font-size: .95rem; margin-bottom: 16px; }
+        .print-steps ol { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: step; }
+        .print-steps li { position: relative; background: #fff; border: 1px solid #ead9c9; border-radius: 6px; padding: 44px 14px 14px; font-size: .95rem; line-height: 1.6; counter-increment: step; }
+        .print-steps li::before { content: counter(step); position: absolute; top: 10px; left: 14px; width: 26px; height: 26px; border-radius: 50%; background: #8b0000; color: #fff; font-size: .8rem; line-height: 26px; text-align: center; font-weight: 700; }
+        .print-steps li span { display: block; }
+        .print-steps li span[lang="en"] { color: #5c4f46; font-style: italic; margin-top: 4px; }
+        @media (max-width: 960px) { .print-steps ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 420px) { .print-steps ol { grid-template-columns: minmax(0, 1fr); } }
+
+        /* Firm and contact block. */
+        .firm-section .booth { display: inline-block; margin: 0 0 18px; padding: 6px 14px; border-radius: 4px; background: #8b0000; color: #fff; font-size: 1rem; font-weight: 700; }
+        .firm-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+        .firm-links a { display: inline-block; min-height: 48px; padding: 10px 18px; line-height: 1.6; border: 1px solid #b88967; border-radius: 4px; font-size: 1rem; }
+        .firm-links a.primary { background: #8b0000; border-color: #8b0000; color: #fff; }
+        .firm-links a:hover { text-decoration: none; background: #fff6e9; }
+        .firm-links a.primary:hover { background: #6e0000; }
+        .footer a { color: #f5d9c6; }
 </style>
 </head>
 <body>
     <header class="hero">
         <div class="hero-content">
-            <p class="event-label">2026 AIPPI · 段和段律师事务所</p>
+            <fieldset class="lang-switch">
+                <legend>语言 / Language</legend>
+                <input type="radio" name="lang" id="lang-both" checked><label for="lang-both">中 / EN</label>
+                <input type="radio" name="lang" id="lang-zh"><label for="lang-zh">中文</label>
+                <input type="radio" name="lang" id="lang-en"><label for="lang-en">English</label>
+            </fieldset>
+            <p class="event-label"><span lang="zh-CN">2026 AIPPI · 50号展位 · 段和段律师事务所</span><br class="lang-br"><span lang="en">AIPPI 2026 · Booth 50 · Duan &amp; Duan Law Firm</span></p>
             <h1>印出中国故事</h1>
             <h2 lang="en">Print a Chinese Story</h2>
-            <p class="hero-subtitle">中国雕版印刷、文化祝愿与亲手体验<span lang="en">Chinese Woodblock Printing, Cultural Symbols and a Hands-on Experience</span></p>
+            <p class="hero-subtitle"><span lang="zh-CN">中国雕版印刷、文化祝愿与亲手体验</span><span lang="en">Chinese Woodblock Printing, Cultural Symbols and a Hands-on Experience</span></p>
             <div class="hero-welcome"><p lang="zh-CN">在2026 AIPPI，段和段律师事务所邀请您亲手体验印刷，让一个中国故事、一句美好祝愿，从版面走到纸上。</p><p lang="en">At AIPPI 2026, Duan &amp; Duan Law Firm invites you to try printing for yourself and discover the Chinese stories and good wishes behind each design.</p></div>
             <nav class="hero-nav" aria-label="页面导航 / Page navigation">
-                <a href="#history">印刷历史 / Printing History</a>
-                <a href="#experience">亲手体验 / Try Printing</a>
-                <a href="#gallery">作品展示 / Our Designs</a>
+                <a href="#history"><span lang="zh-CN">印刷历史</span><span class="sep"> / </span><span lang="en">Printing History</span></a>
+                <a href="#experience"><span lang="zh-CN">亲手体验</span><span class="sep"> / </span><span lang="en">Try Printing</span></a>
+                <a href="#gallery"><span lang="zh-CN">作品展示</span><span class="sep"> / </span><span lang="en">Our Designs</span></a>
+                <a href="#firm"><span lang="zh-CN">联系我们</span><span class="sep"> / </span><span lang="en">Contact Us</span></a>
             </nav>
+            <ul class="work-strip" aria-label="作品一览 / All designs">
+                <li><a href="#work-01" aria-label="先师孔子行教像 / Portrait of Confucius"><img src="assets/aippi-2026/01-portrait/print-thumb.webp" alt="" width="174" height="240"></a></li>
+                <li><a href="#work-02" aria-label="青花瓷·双鱼纳福 / Porcelain Motif: Fish and Good Fortune"><img src="assets/aippi-2026/02-porcelain/print-thumb.webp" alt="" width="174" height="240"></a></li>
+                <li><a href="#work-03" aria-label="青龙 / Azure Dragon"><img src="assets/aippi-2026/03-dragon-tiger/dragon-print-thumb.webp" alt="" width="240" height="183"></a></li>
+                <li><a href="#work-03" aria-label="白虎 / White Tiger"><img src="assets/aippi-2026/03-dragon-tiger/tiger-print-thumb.webp" alt="" width="240" height="191"></a></li>
+                <li><a href="#work-04" aria-label="中国龙·龙纹盖罐 / Chinese Dragon on a Covered Jar"><img src="assets/aippi-2026/04-dragon-jar/print-thumb.webp" alt="" width="169" height="240"></a></li>
+                <li><a href="#work-05" aria-label="马上幸福 / Happiness, Right Away!"><img src="assets/aippi-2026/05-instant-happiness/print-thumb.webp" alt="" width="178" height="240"></a></li>
+                <li><a href="#work-06" aria-label="马到成功 / Swift Success"><img src="assets/aippi-2026/06-swift-success/print-thumb.webp" alt="" width="180" height="240"></a></li>
+                <li><a href="#work-07" aria-label="马上暴富 / Strike It Rich!"><img src="assets/aippi-2026/07-instant-riches/print-thumb.webp" alt="" width="178" height="240"></a></li>
+                <li><a href="#work-08" aria-label="保护知识产权就是保护创新 / Protect IP, Protect Innovation"><img src="assets/aippi-2026/08-protect-innovation/print-thumb.webp" alt="" width="170" height="240"></a></li>
+            </ul>
         </div>
     </header>
     <main class="container">
         <section class="section" id="history" aria-labelledby="history-heading">
-            <h3 id="history-heading"><span class="emoji-icon" aria-hidden="true">🧾</span>工艺与历史 / Technique and History</h3>
+            <h3 id="history-heading"><span class="emoji-icon" aria-hidden="true">🧾</span><span lang="zh-CN">工艺与历史</span><span class="sep"> / </span><span lang="en">Technique and History</span></h3>
             <div class="bilingual"><div class="zh"><p lang="zh-CN">中国雕版印刷已有一千多年的历史。传统工艺将文字与图案反向刻在木板上，保留凸起的印刷部分，再上墨、覆纸、施压，将图像转印到纸张。同一块雕版可以反复印制，让文字、图像与知识更广泛地传播。</p>
 <p lang="zh-CN">唐代868年的《金刚经》，是现存最早有明确纪年的完整印刷书。北宋毕昇发展了可拆分重排的泥活字，而雕版印刷仍长期延续。2009年，中国雕版印刷技艺列入联合国教科文组织人类非物质文化遗产代表作名录。</p></div><div class="en"><p lang="en">Chinese woodblock printing has a history of more than a thousand years. Artisans carve a design in reverse on a wooden block, leaving the printing surface raised. Ink is applied, paper is laid over the block, and pressure transfers the image. A single block can produce many impressions, helping texts, images and knowledge reach more people.</p>
 <p lang="en">The Diamond Sutra, dated 868 CE, is the earliest surviving complete printed book with an explicit date. In the Northern Song dynasty, Bi Sheng developed reusable clay movable type, while woodblock printing continued for centuries. In 2009, China’s engraved block printing technique was inscribed on UNESCO’s Representative List of the Intangible Cultural Heritage of Humanity.</p></div></div>
         </section>
         <section class="section display-section" id="stories" aria-labelledby="stories-heading">
-            <h3 id="stories-heading"><span class="emoji-icon" aria-hidden="true">🧧</span>图案中的故事与祝愿 / Stories and Good Wishes</h3>
+            <h3 id="stories-heading"><span class="emoji-icon" aria-hidden="true">🧧</span><span lang="zh-CN">图案中的故事与祝愿</span><span class="sep"> / </span><span lang="en">Stories and Good Wishes</span></h3>
             <div class="bilingual"><div class="zh"><p lang="zh-CN">这次作品将知识传承与文化祝愿放在一起：孔子的形象表达对教育与先贤的敬意；青花瓷纹样中的双鱼环绕福字，寓意年年有余、福气相伴；龙纹盖罐以盘曲的中国龙，传达祥瑞与护佑的文化意象。</p>
 <p lang="zh-CN">一对青龙与白虎石刻图像呈现传统守护意象：青龙对应东方，白虎对应西方。它们在本次展示中寄托平安与成功的祝愿，供来宾观赏。</p>
 <p lang="zh-CN">四款滚轴作品加入当代趣味。“马上幸福”与“马上暴富”利用马上的双重含义——立即与在马背上——把祝福变成图文游戏；“马到成功”祝愿迅速成功、事业顺遂；“保护知识产权就是保护创新”则以盾牌、灯泡、书本和机器人，将传统印刷与今天的创意、知识和技术相联系。</p></div><div class="en"><p lang="en">The designs bring learning and good wishes together. Confucius honours education and the passing on of knowledge. Two fish surrounding the character fú (福) express wishes for abundance year after year and good fortune: the Chinese words for fish and surplus share the same pronunciation, yú. A dragon-decorated covered jar carries associations of auspiciousness and protection.</p>
@@ -400,90 +494,100 @@
 <p lang="en">Four roller-operated designs add a contemporary touch. Happiness, Right Away! and Strike It Rich! play on mǎshàng, which means both right away and on horseback. Swift Success translates the wish expressed by mǎ dào chéng gōng. Protect IP, Protect Innovation uses a shield, light bulb, books and robot to connect printing with creativity, knowledge and technology today.</p></div></div>
         </section>
         <section class="section key-statement" id="experience" aria-labelledby="experience-heading">
-            <h3 id="experience-heading"><span class="emoji-icon" aria-hidden="true">🖐️</span>七款图案，亲手印制 / Seven Designs to Print Yourself</h3>
+            <h3 id="experience-heading"><span class="emoji-icon" aria-hidden="true">🖐️</span><span lang="zh-CN">七款图案，亲手印制</span><span class="sep"> / </span><span lang="en">Seven Designs to Print Yourself</span></h3>
             <div class="bilingual"><div class="zh"><p lang="zh-CN">除青龙与白虎这一对石刻展示外，其余七款作品都可以上手自行印制。欢迎选择您喜欢的图案，体验图像从版面转印到纸张的过程，印下一份祝愿，也亲手感受印刷的乐趣。</p></div><div class="en"><p lang="en">Apart from the Azure Dragon and White Tiger pair, all seven other designs are available for you to print yourself. Choose a design, watch its image transfer onto paper, and give a good wish a form of your own.</p></div></div>
+            <div class="print-steps">
+                <h4><span lang="zh-CN">拓印四步</span><span class="sep"> / </span><span lang="en">Rubbing Print in Four Steps</span></h4>
+                <p class="method-note"><span lang="zh-CN">适用于孔子、青花瓷和龙纹盖罐三款。四款滚轴作品使用滚轴操作印制。</span><br class="lang-br"><span lang="en">For the Confucius, Porcelain and Dragon Jar designs. The four roller designs are printed with a roller.</span></p>
+                <ol>
+                    <li><span lang="zh-CN">在雕版上刷颜料</span><span lang="en">Brush colour onto the carved block</span></li>
+                    <li><span lang="zh-CN">覆上一张宣纸</span><span lang="en">Lay a sheet of xuan (rice) paper over it</span></li>
+                    <li><span lang="zh-CN">用拓包轻压，让图案转到纸上</span><span lang="en">Press with a cloth rubbing pad (tuobao) to pick up the image</span></li>
+                    <li><span lang="zh-CN">从雕版上揭下宣纸，作品完成</span><span lang="en">Peel the paper off the block to reveal your print</span></li>
+                </ol>
+            </div>
         </section>
         <section class="section" id="gallery" aria-labelledby="gallery-heading">
-            <h3 id="gallery-heading"><span class="emoji-icon" aria-hidden="true">🖼️</span>本次作品展示 / Our Exhibition</h3>
-            <p class="gallery-note">点击图片查看完整原图。附有雕版照片的作品，可展开查看雕版本体。</p>
+            <h3 id="gallery-heading"><span class="emoji-icon" aria-hidden="true">🖼️</span><span lang="zh-CN">本次作品展示</span><span class="sep"> / </span><span lang="en">Our Exhibition</span></h3>
+            <p class="gallery-note" lang="zh-CN">点击图片查看完整原图。附有雕版照片的作品，可展开查看雕版本体。</p>
             <p class="gallery-note" lang="en">Select an image to view it full size. Where available, open “View the Woodblock” to see the carved block.</p>
-            <p class="gallery-note gallery-count">8组作品 · 7款可自行印制 · 青龙与白虎一对仅供观赏<br><span lang="en">Eight groups · Seven designs to print · The dragon-and-tiger pair is for viewing</span></p>
+            <p class="gallery-note gallery-count"><span lang="zh-CN">8组作品 · 7款可自行印制 · 青龙与白虎一对仅供观赏</span><br class="lang-br"><span lang="en">Eight groups · Seven designs to print · The dragon-and-tiger pair is for viewing</span></p>
             <div class="gallery-grid">
                 <article class="gallery-item" id="work-01" data-work-id="01" data-printable="true">
-<a class="work-image" href="assets/aippi-2026/01-portrait/print-original.jpeg" target="_blank" rel="noopener" aria-label="先师孔子行教像印样 / Portrait of Confucius print — 查看原图 / Open full image"><img src="assets/aippi-2026/01-portrait/print-original.jpeg" alt="先师孔子行教像印样 / Portrait of Confucius print" width="1536" height="2048" loading="lazy" decoding="async"></a>
+<a class="work-image" href="assets/aippi-2026/01-portrait/print-full.jpeg" target="_blank" rel="noopener" aria-label="先师孔子行教像印样 / Portrait of Confucius print — 查看原图 / Open full image"><img src="assets/aippi-2026/01-portrait/print-1000.webp" srcset="assets/aippi-2026/01-portrait/print-640.webp 463w, assets/aippi-2026/01-portrait/print-1000.webp 724w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="先师孔子行教像印样 / Portrait of Confucius print" width="724" height="1000" loading="lazy" decoding="async"></a>
 <div class="gallery-item-content">
 <h4 class="work-title">先师孔子行教像<span lang="en">Portrait of Confucius</span></h4>
-<div class="work-meta"><span class="badge">可自行印制 · Make Your Own Print</span></div>
+<div class="work-meta"><span class="badge"><span lang="zh-CN">可自行印制</span><span class="sep"> · </span><span lang="en">Make Your Own Print</span></span></div>
 <p class="zh-intro" lang="zh-CN">这件作品以端庄的孔子形象，表达对先贤与教育的敬意。印样题有“先师孔子行教像”，并以“德侔天地，道冠古今；删述六经，垂宪万世”的文字颂扬其学问与德行。通过雕版印刷，人物形象与文字一同留在纸上，让知识传承成为可见、可分享的故事。</p>
 <p class="en-intro" lang="en">This dignified portrait of Confucius honours learning and the passing on of knowledge. Its inscriptions praise his wisdom, virtue and lasting influence as a teacher. Printing brings the portrait and its words together on paper, giving this tribute a form that visitors can share.</p>
-<details class="block-photo"><summary>查看雕版本体 / View the Woodblock</summary><a class="work-image" href="assets/aippi-2026/01-portrait/block-original.jpeg" target="_blank" rel="noopener" aria-label="先师孔子行教像雕版本体 / Woodblock — 查看原图 / Open full image"><img src="assets/aippi-2026/01-portrait/block-original.jpeg" alt="先师孔子行教像雕版本体 / Woodblock" width="1536" height="2048" loading="lazy" decoding="async" class="rotate-180"></a></details>
+<details class="block-photo"><summary><span lang="zh-CN">查看雕版本体</span><span class="sep"> / </span><span lang="en">View the Woodblock</span></summary><a class="work-image" href="assets/aippi-2026/01-portrait/block-full.jpeg" target="_blank" rel="noopener" aria-label="先师孔子行教像雕版本体 / Woodblock — 查看原图 / Open full image"><img src="assets/aippi-2026/01-portrait/block-1000.webp" srcset="assets/aippi-2026/01-portrait/block-640.webp 480w, assets/aippi-2026/01-portrait/block-1000.webp 749w" sizes="(max-width: 960px) calc(100vw - 112px), 480px" alt="先师孔子行教像雕版本体 / Woodblock" width="749" height="1000" loading="lazy" decoding="async"></a></details>
 </div>
 </article>
 <article class="gallery-item" id="work-02" data-work-id="02" data-printable="true">
-<a class="work-image" href="assets/aippi-2026/02-porcelain/print-original.jpeg" target="_blank" rel="noopener" aria-label="青花瓷·双鱼纳福印样 / Porcelain Motif: Fish and Good Fortune print — 查看原图 / Open full image"><img src="assets/aippi-2026/02-porcelain/print-original.jpeg" alt="青花瓷·双鱼纳福印样 / Porcelain Motif: Fish and Good Fortune print" width="1536" height="2048" loading="lazy" decoding="async"></a>
+<a class="work-image" href="assets/aippi-2026/02-porcelain/print-full.jpeg" target="_blank" rel="noopener" aria-label="青花瓷·双鱼纳福印样 / Porcelain Motif: Fish and Good Fortune print — 查看原图 / Open full image"><img src="assets/aippi-2026/02-porcelain/print-1000.webp" srcset="assets/aippi-2026/02-porcelain/print-640.webp 464w, assets/aippi-2026/02-porcelain/print-1000.webp 725w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="青花瓷·双鱼纳福印样 / Porcelain Motif: Fish and Good Fortune print" width="725" height="1000" loading="lazy" decoding="async"></a>
 <div class="gallery-item-content">
 <h4 class="work-title">青花瓷·双鱼纳福<span lang="en">Porcelain Motif: Fish and Good Fortune</span></h4>
-<div class="work-meta"><span class="badge">可自行印制 · Make Your Own Print</span></div>
+<div class="work-meta"><span class="badge"><span lang="zh-CN">可自行印制</span><span class="sep"> · </span><span lang="en">Make Your Own Print</span></span></div>
 <p class="zh-intro" lang="zh-CN">这件作品以瓷瓶为轮廓，双鱼环绕中央的“福”字，周围饰以花卉纹样。“鱼”与“余”谐音，寄托“年年有余”的祝愿；“福”字则代表福气与好运。两种吉祥意象相伴，表达生活丰足、福气常在的美好心愿。</p>
 <p class="en-intro" lang="en">Within the outline of a porcelain vase, two fish surround the character fú (福), meaning good fortune or blessings. The Chinese words for fish and surplus share the pronunciation yú, so fish express a wish for abundance year after year. Together, the fish and fú offer wishes for a plentiful life and lasting good fortune.</p>
-<details class="block-photo"><summary>查看雕版本体 / View the Woodblock</summary><a class="work-image" href="assets/aippi-2026/02-porcelain/block-original.jpeg" target="_blank" rel="noopener" aria-label="青花瓷·双鱼纳福雕版本体 / Woodblock — 查看原图 / Open full image"><img src="assets/aippi-2026/02-porcelain/block-original.jpeg" alt="青花瓷·双鱼纳福雕版本体 / Woodblock" width="2048" height="1536" loading="lazy" decoding="async"></a></details>
+<details class="block-photo"><summary><span lang="zh-CN">查看雕版本体</span><span class="sep"> / </span><span lang="en">View the Woodblock</span></summary><a class="work-image" href="assets/aippi-2026/02-porcelain/block-full.jpeg" target="_blank" rel="noopener" aria-label="青花瓷·双鱼纳福雕版本体 / Woodblock — 查看原图 / Open full image"><img src="assets/aippi-2026/02-porcelain/block-1000.webp" srcset="assets/aippi-2026/02-porcelain/block-640.webp 423w, assets/aippi-2026/02-porcelain/block-1000.webp 660w" sizes="(max-width: 960px) calc(100vw - 112px), 480px" alt="青花瓷·双鱼纳福雕版本体 / Woodblock" width="660" height="1000" loading="lazy" decoding="async"></a></details>
 </div>
 </article>
 <article class="gallery-item gallery-item--pair" id="work-03" data-work-id="03" data-printable="false">
-<div class="paired-prints"><figure><a class="work-image" href="assets/aippi-2026/03-dragon-tiger/dragon-print-original.jpeg" target="_blank" rel="noopener" aria-label="青龙印样 / Azure Dragon print — 查看原图 / Open full image"><img src="assets/aippi-2026/03-dragon-tiger/dragon-print-original.jpeg" alt="青龙印样 / Azure Dragon print" width="2048" height="1536" loading="lazy" decoding="async"></a><figcaption>青龙 / Azure Dragon</figcaption></figure><figure><a class="work-image" href="assets/aippi-2026/03-dragon-tiger/tiger-print-original.jpeg" target="_blank" rel="noopener" aria-label="白虎印样 / White Tiger print — 查看原图 / Open full image"><img src="assets/aippi-2026/03-dragon-tiger/tiger-print-original.jpeg" alt="白虎印样 / White Tiger print" width="2048" height="1536" loading="lazy" decoding="async"></a><figcaption>白虎 / White Tiger</figcaption></figure></div>
+<div class="paired-prints"><figure><a class="work-image" href="assets/aippi-2026/03-dragon-tiger/dragon-print-full.jpeg" target="_blank" rel="noopener" aria-label="青龙印样 / Azure Dragon print — 查看原图 / Open full image"><img src="assets/aippi-2026/03-dragon-tiger/dragon-print-1000.webp" srcset="assets/aippi-2026/03-dragon-tiger/dragon-print-640.webp 640w, assets/aippi-2026/03-dragon-tiger/dragon-print-1000.webp 1000w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="青龙印样 / Azure Dragon print" width="1000" height="764" loading="lazy" decoding="async"></a><figcaption><span lang="zh-CN">青龙</span><span class="sep"> / </span><span lang="en">Azure Dragon</span></figcaption></figure><figure><a class="work-image" href="assets/aippi-2026/03-dragon-tiger/tiger-print-full.jpeg" target="_blank" rel="noopener" aria-label="白虎印样 / White Tiger print — 查看原图 / Open full image"><img src="assets/aippi-2026/03-dragon-tiger/tiger-print-1000.webp" srcset="assets/aippi-2026/03-dragon-tiger/tiger-print-640.webp 640w, assets/aippi-2026/03-dragon-tiger/tiger-print-1000.webp 1000w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="白虎印样 / White Tiger print" width="1000" height="796" loading="lazy" decoding="async"></a><figcaption><span lang="zh-CN">白虎</span><span class="sep"> / </span><span lang="en">White Tiger</span></figcaption></figure></div>
 <div class="gallery-item-content">
 <h4 class="work-title">青龙与白虎<span lang="en">Azure Dragon and White Tiger</span></h4>
-<div class="work-meta"><span class="badge viewing">仅供观赏 · Viewing Only</span></div>
+<div class="work-meta"><span class="badge viewing"><span lang="zh-CN">仅供观赏</span><span class="sep"> · </span><span lang="en">Viewing Only</span></span></div>
 <p class="zh-intro" lang="zh-CN">“左青龙，右白虎”呈现中国传统的守护意象。这一对作品以龙的盘曲姿态和虎的昂扬身形，寄托护佑、平安与成功的祝愿。青龙与白虎石刻图像在本次展览中成对展示，供来宾观赏。</p>
 <p class="en-intro" lang="en">The Azure Dragon and White Tiger are traditional Chinese guardian symbols, often paired as the dragon on the left and the tiger on the right. Their flowing, energetic forms carry wishes for protection, peace and success. This pair of stone-carving images is displayed for viewing.</p>
 
 </div>
 </article>
 <article class="gallery-item" id="work-04" data-work-id="04" data-printable="true">
-<a class="work-image" href="assets/aippi-2026/04-dragon-jar/print-original.jpeg" target="_blank" rel="noopener" aria-label="中国龙·龙纹盖罐印样 / Chinese Dragon on a Covered Jar print — 查看原图 / Open full image"><img src="assets/aippi-2026/04-dragon-jar/print-original.jpeg" alt="中国龙·龙纹盖罐印样 / Chinese Dragon on a Covered Jar print" width="1536" height="2048" loading="lazy" decoding="async"></a>
+<a class="work-image" href="assets/aippi-2026/04-dragon-jar/print-full.jpeg" target="_blank" rel="noopener" aria-label="中国龙·龙纹盖罐印样 / Chinese Dragon on a Covered Jar print — 查看原图 / Open full image"><img src="assets/aippi-2026/04-dragon-jar/print-1000.webp" srcset="assets/aippi-2026/04-dragon-jar/print-640.webp 452w, assets/aippi-2026/04-dragon-jar/print-1000.webp 706w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="中国龙·龙纹盖罐印样 / Chinese Dragon on a Covered Jar print" width="706" height="1000" loading="lazy" decoding="async"></a>
 <div class="gallery-item-content">
 <h4 class="work-title">中国龙·龙纹盖罐<span lang="en">Chinese Dragon on a Covered Jar</span></h4>
-<div class="work-meta"><span class="badge">可自行印制 · Make Your Own Print</span></div>
+<div class="work-meta"><span class="badge"><span lang="zh-CN">可自行印制</span><span class="sep"> · </span><span lang="en">Make Your Own Print</span></span></div>
 <p class="zh-intro" lang="zh-CN">这件作品以有盖罐为外形，将一条盘曲的中国龙融入器身装饰。龙在中国传统文化中是祥瑞的象征，常与护佑、幸福以及江河湖泊等水域相联系。龙纹也是中国陶瓷的传统装饰题材。盘曲的龙身与繁密的纹饰相结合，呈现出鲜明的动势。</p>
 <p class="en-intro" lang="en">This woodblock print depicts a coiling Chinese dragon within the outline of a covered jar. In Chinese tradition, dragons are auspicious creatures associated with protection, happiness and water. Dragon motifs are also a familiar feature of Chinese ceramics. The winding body and richly patterned decoration give the image a lively sense of movement.</p>
-<details class="block-photo"><summary>查看雕版本体 / View the Woodblock</summary><a class="work-image" href="assets/aippi-2026/04-dragon-jar/block-original.jpeg" target="_blank" rel="noopener" aria-label="中国龙·龙纹盖罐雕版本体 / Woodblock — 查看原图 / Open full image"><img src="assets/aippi-2026/04-dragon-jar/block-original.jpeg" alt="中国龙·龙纹盖罐雕版本体 / Woodblock" width="1536" height="2048" loading="lazy" decoding="async"></a></details>
+<details class="block-photo"><summary><span lang="zh-CN">查看雕版本体</span><span class="sep"> / </span><span lang="en">View the Woodblock</span></summary><a class="work-image" href="assets/aippi-2026/04-dragon-jar/block-full.jpeg" target="_blank" rel="noopener" aria-label="中国龙·龙纹盖罐雕版本体 / Woodblock — 查看原图 / Open full image"><img src="assets/aippi-2026/04-dragon-jar/block-1000.webp" srcset="assets/aippi-2026/04-dragon-jar/block-640.webp 640w, assets/aippi-2026/04-dragon-jar/block-1000.webp 1000w" sizes="(max-width: 960px) calc(100vw - 112px), 480px" alt="中国龙·龙纹盖罐雕版本体 / Woodblock" width="1000" height="992" loading="lazy" decoding="async"></a></details>
 </div>
 </article>
 <article class="gallery-item" id="work-05" data-work-id="05" data-printable="true">
-<a class="work-image" href="assets/aippi-2026/05-instant-happiness/print-original.jpeg" target="_blank" rel="noopener" aria-label="马上幸福印样 / Happiness, Right Away! print — 查看原图 / Open full image"><img src="assets/aippi-2026/05-instant-happiness/print-original.jpeg" alt="马上幸福印样 / Happiness, Right Away! print" width="1536" height="2048" loading="lazy" decoding="async"></a>
+<a class="work-image" href="assets/aippi-2026/05-instant-happiness/print-full.jpeg" target="_blank" rel="noopener" aria-label="马上幸福印样 / Happiness, Right Away! print — 查看原图 / Open full image"><img src="assets/aippi-2026/05-instant-happiness/print-1000.webp" srcset="assets/aippi-2026/05-instant-happiness/print-640.webp 474w, assets/aippi-2026/05-instant-happiness/print-1000.webp 740w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="马上幸福印样 / Happiness, Right Away! print" width="740" height="1000" loading="lazy" decoding="async"></a>
 <div class="gallery-item-content">
 <h4 class="work-title">马上幸福<span lang="en">Happiness, Right Away!</span></h4>
-<div class="work-meta"><span class="badge">可自行印制 · Make Your Own Print</span><span class="badge roller">滚轴操作 · Roller Printing</span></div>
+<div class="work-meta"><span class="badge"><span lang="zh-CN">可自行印制</span><span class="sep"> · </span><span lang="en">Make Your Own Print</span></span><span class="badge roller"><span lang="zh-CN">滚轴操作</span><span class="sep"> · </span><span lang="en">Roller Printing</span></span></div>
 <p class="zh-intro" lang="zh-CN">马与福字共同表达幸福和好运的祝愿。马上既指立即，也可按字面理解为在马背上，形成图文双关，寓意幸福即刻到来。</p>
 <p class="en-intro" lang="en">The horse and the Chinese character fú (福), meaning good fortune or blessings, offer a wish for happiness and good luck. Mǎshàng means both “right away” and “on horseback,” creating a playful wish for happiness to arrive without delay.</p>
 
 </div>
 </article>
 <article class="gallery-item" id="work-06" data-work-id="06" data-printable="true">
-<a class="work-image" href="assets/aippi-2026/06-swift-success/print-original.jpeg" target="_blank" rel="noopener" aria-label="马到成功印样 / Swift Success print — 查看原图 / Open full image"><img src="assets/aippi-2026/06-swift-success/print-original.jpeg" alt="马到成功印样 / Swift Success print" width="1536" height="2048" loading="lazy" decoding="async"></a>
+<a class="work-image" href="assets/aippi-2026/06-swift-success/print-full.jpeg" target="_blank" rel="noopener" aria-label="马到成功印样 / Swift Success print — 查看原图 / Open full image"><img src="assets/aippi-2026/06-swift-success/print-1000.webp" srcset="assets/aippi-2026/06-swift-success/print-640.webp 480w, assets/aippi-2026/06-swift-success/print-1000.webp 750w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="马到成功印样 / Swift Success print" width="750" height="1000" loading="lazy" decoding="async"></a>
 <div class="gallery-item-content">
 <h4 class="work-title">马到成功<span lang="en">Swift Success</span></h4>
-<div class="work-meta"><span class="badge">可自行印制 · Make Your Own Print</span><span class="badge roller">滚轴操作 · Roller Printing</span></div>
+<div class="work-meta"><span class="badge"><span lang="zh-CN">可自行印制</span><span class="sep"> · </span><span lang="en">Make Your Own Print</span></span><span class="badge roller"><span lang="zh-CN">滚轴操作</span><span class="sep"> · </span><span lang="en">Roller Printing</span></span></div>
 <p class="zh-intro" lang="zh-CN">马到成功是祝愿迅速取得成功的成语，字面意为马一到便成功。画中的马寄托对新事业、新目标顺利成功的祝福。</p>
 <p class="en-intro" lang="en">Mǎ dào chéng gōng is a Chinese idiom meaning “swift success,” literally “success as soon as the horse arrives.” This spirited horse carries a wish for success in your next venture.</p>
 
 </div>
 </article>
 <article class="gallery-item" id="work-07" data-work-id="07" data-printable="true">
-<a class="work-image" href="assets/aippi-2026/07-instant-riches/print-original.jpeg" target="_blank" rel="noopener" aria-label="马上暴富印样 / Strike It Rich! print — 查看原图 / Open full image"><img src="assets/aippi-2026/07-instant-riches/print-original.jpeg" alt="马上暴富印样 / Strike It Rich! print" width="1536" height="2048" loading="lazy" decoding="async"></a>
+<a class="work-image" href="assets/aippi-2026/07-instant-riches/print-full.jpeg" target="_blank" rel="noopener" aria-label="马上暴富印样 / Strike It Rich! print — 查看原图 / Open full image"><img src="assets/aippi-2026/07-instant-riches/print-1000.webp" srcset="assets/aippi-2026/07-instant-riches/print-640.webp 476w, assets/aippi-2026/07-instant-riches/print-1000.webp 743w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="马上暴富印样 / Strike It Rich! print" width="743" height="1000" loading="lazy" decoding="async"></a>
 <div class="gallery-item-content">
 <h4 class="work-title">马上暴富<span lang="en">Strike It Rich!</span></h4>
-<div class="work-meta"><span class="badge">可自行印制 · Make Your Own Print</span><span class="badge roller">滚轴操作 · Roller Printing</span></div>
+<div class="work-meta"><span class="badge"><span lang="zh-CN">可自行印制</span><span class="sep"> · </span><span lang="en">Make Your Own Print</span></span><span class="badge roller"><span lang="zh-CN">滚轴操作</span><span class="sep"> · </span><span lang="en">Roller Printing</span></span></div>
 <p class="zh-intro" lang="zh-CN">马与钱币把马上的双重含义结合起来，幽默地表达迅速发财的祝愿。马上暴富是夸张而轻松的吉祥祝福。</p>
 <p class="en-intro" lang="en">The horse and coins turn the double meaning of mǎshàng—“right away” and “on horseback”—into a cheerful wish to strike it rich. This is a light-hearted blessing for wealth and prosperity!</p>
 
 </div>
 </article>
 <article class="gallery-item" id="work-08" data-work-id="08" data-printable="true">
-<a class="work-image" href="assets/aippi-2026/08-protect-innovation/print-original.jpeg" target="_blank" rel="noopener" aria-label="保护知识产权就是保护创新印样 / Protect IP, Protect Innovation print — 查看原图 / Open full image"><img src="assets/aippi-2026/08-protect-innovation/print-original.jpeg" alt="保护知识产权就是保护创新印样 / Protect IP, Protect Innovation print" width="1536" height="2048" loading="lazy" decoding="async"></a>
+<a class="work-image" href="assets/aippi-2026/08-protect-innovation/print-full.jpeg" target="_blank" rel="noopener" aria-label="保护知识产权就是保护创新印样 / Protect IP, Protect Innovation print — 查看原图 / Open full image"><img src="assets/aippi-2026/08-protect-innovation/print-1000.webp" srcset="assets/aippi-2026/08-protect-innovation/print-640.webp 454w, assets/aippi-2026/08-protect-innovation/print-1000.webp 709w" sizes="(max-width: 960px) calc(100vw - 72px), 520px" alt="保护知识产权就是保护创新印样 / Protect IP, Protect Innovation print" width="709" height="1000" loading="lazy" decoding="async"></a>
 <div class="gallery-item-content">
 <h4 class="work-title">保护知识产权就是保护创新<span lang="en">Protect IP, Protect Innovation</span></h4>
-<div class="work-meta"><span class="badge">可自行印制 · Make Your Own Print</span><span class="badge roller">滚轴操作 · Roller Printing</span></div>
+<div class="work-meta"><span class="badge"><span lang="zh-CN">可自行印制</span><span class="sep"> · </span><span lang="en">Make Your Own Print</span></span><span class="badge roller"><span lang="zh-CN">滚轴操作</span><span class="sep"> · </span><span lang="en">Roller Printing</span></span></div>
 <p class="zh-intro" lang="zh-CN">盾牌与锁象征保护，灯泡、齿轮、书本和机器人表现创意、知识和技术。作品以保护知识产权就是保护创新为主题，致意让新想法成为现实的创造者。</p>
 <p class="en-intro" lang="en">Protecting intellectual property means protecting innovation. The shield and lock represent protection, while the light bulb, gears, books and robot evoke creativity, knowledge and technology. The design celebrates the people whose imagination and work bring new ideas to life.</p>
 
@@ -491,22 +595,30 @@
 </article>
             </div>
         </section>
+        <section class="section firm-section" id="firm" aria-labelledby="firm-heading">
+            <h3 id="firm-heading"><span class="emoji-icon" aria-hidden="true">🤝</span><span lang="zh-CN">关于段和段</span><span class="sep"> / </span><span lang="en">About Duan &amp; Duan</span></h3>
+            <p class="booth"><span lang="zh-CN">欢迎来到50号展位</span><span class="sep"> · </span><span lang="en">Visit us at Booth 50</span></p>
+            <div class="bilingual"><div class="zh"><p lang="zh-CN">段和段律师事务所1993年创立于上海，是中国最具特色的与国际接轨的律师事务所之一，在国内外设有多个办公室。</p>
+<p lang="zh-CN">我们的知识产权团队协助客户保护、运用和维护创新成果。从一块雕版到一项新技术，创造都值得被保护。欢迎来展位聊聊您的知识产权问题。</p></div><div class="en"><p lang="en">Founded in Shanghai in 1993, Duan &amp; Duan is one of China’s most distinctive internationally oriented law firms, with offices in China and abroad.</p>
+<p lang="en">Our intellectual property team helps clients protect, use and enforce their innovations. From a carved woodblock to a new technology, creative work deserves protection. Stop by our booth to talk about your IP questions.</p></div></div>
+            <div class="firm-links"><a class="primary" href="https://www.duanduan.com/" target="_blank" rel="noopener"><span lang="zh-CN">访问官网</span><span class="sep"> / </span><span lang="en">Visit duanduan.com</span></a></div>
+        </section>
         <section class="section" aria-label="资料来源 / Sources">
             <details class="reference-note">
-                <summary>历史与文化资料来源 / Historical and Cultural Sources</summary>
-                <ul><li><a href="https://education.asianart.org/resources/the-invention-of-woodblock-printing-in-the-tang-and-song-dynasties/" target="_blank" rel="noopener">亚洲艺术博物馆：唐宋雕版与活字印刷 / Asian Art Museum: Woodblock Printing and Movable Type</a></li>
-<li><a href="https://idp.bl.uk/discover/learning/dunhuang/collection-items/cave-17-the-library-cave/" target="_blank" rel="noopener">英国图书馆：868年《金刚经》 / British Library: The Diamond Sutra</a></li>
-<li><a href="https://ich.unesco.org/en/RL/china-engraved-block-printing-technique-00229" target="_blank" rel="noopener">联合国教科文组织：中国雕版印刷技艺 / UNESCO: China Engraved Block Printing Technique</a></li>
-<li><a href="https://whc.unesco.org/en/list/704" target="_blank" rel="noopener">联合国教科文组织：孔子与曲阜 / UNESCO: Confucius and Qufu</a></li>
-<li><a href="https://www.metmuseum.org/art/collection/search/42364" target="_blank" rel="noopener">大都会艺术博物馆：中国龙的文化寓意 / The Met: Dragon Symbolism</a></li>
-<li><a href="https://www.dpm.org.cn/lemmas/243642.html" target="_blank" rel="noopener">故宫博物院：龙纹 / The Palace Museum: Dragon Motifs</a></li>
-<li><a href="https://artmuseum.princeton.edu/art/collections/objects/135925" target="_blank" rel="noopener">普林斯顿大学艺术博物馆：青龙与白虎 / Princeton University Art Museum: Dragon and Tiger Guardians</a></li></ul>
+                <summary><span lang="zh-CN">历史与文化资料来源</span><span class="sep"> / </span><span lang="en">Historical and Cultural Sources</span></summary>
+                <ul><li><a href="https://education.asianart.org/resources/the-invention-of-woodblock-printing-in-the-tang-and-song-dynasties/" target="_blank" rel="noopener"><span lang="zh-CN">亚洲艺术博物馆：唐宋雕版与活字印刷</span><span class="sep"> / </span><span lang="en">Asian Art Museum: Woodblock Printing and Movable Type</span></a></li>
+<li><a href="https://idp.bl.uk/discover/learning/dunhuang/collection-items/cave-17-the-library-cave/" target="_blank" rel="noopener"><span lang="zh-CN">英国图书馆：868年《金刚经》</span><span class="sep"> / </span><span lang="en">British Library: The Diamond Sutra</span></a></li>
+<li><a href="https://ich.unesco.org/en/RL/china-engraved-block-printing-technique-00229" target="_blank" rel="noopener"><span lang="zh-CN">联合国教科文组织：中国雕版印刷技艺</span><span class="sep"> / </span><span lang="en">UNESCO: China Engraved Block Printing Technique</span></a></li>
+<li><a href="https://whc.unesco.org/en/list/704" target="_blank" rel="noopener"><span lang="zh-CN">联合国教科文组织：孔子与曲阜</span><span class="sep"> / </span><span lang="en">UNESCO: Confucius and Qufu</span></a></li>
+<li><a href="https://www.metmuseum.org/art/collection/search/42364" target="_blank" rel="noopener"><span lang="zh-CN">大都会艺术博物馆：中国龙的文化寓意</span><span class="sep"> / </span><span lang="en">The Met: Dragon Symbolism</span></a></li>
+<li><a href="https://www.dpm.org.cn/lemmas/243642.html" target="_blank" rel="noopener"><span lang="zh-CN">故宫博物院：龙纹</span><span class="sep"> / </span><span lang="en">The Palace Museum: Dragon Motifs</span></a></li>
+<li><a href="https://artmuseum.princeton.edu/art/collections/objects/135925" target="_blank" rel="noopener"><span lang="zh-CN">普林斯顿大学艺术博物馆：青龙与白虎</span><span class="sep"> / </span><span lang="en">Princeton University Art Museum: Dragon and Tiger Guardians</span></a></li></ul>
             </details>
         </section>
     </main>
     <footer class="footer">
-        <p>段和段律师事务所 | <span lang="en">Duan & Duan Law Firm</span></p>
-        <p>2026 AIPPI · 中国印刷文化体验 | <span lang="en">A Chinese Printing Experience</span></p>
+        <p><a href="https://www.duanduan.com/" target="_blank" rel="noopener"><span lang="zh-CN">段和段律师事务所</span><span class="sep"> | </span><span lang="en">Duan &amp; Duan Law Firm</span></a></p>
+        <p><span lang="zh-CN">2026 AIPPI · 50号展位 · 中国印刷文化体验</span><span class="sep"> | </span><span lang="en">AIPPI 2026 · Booth 50 · A Chinese Printing Experience</span></p>
     </footer>
     <div class="playback-controls" role="group" aria-label="自动循环展示 / Automatic scrolling" hidden>
         <div class="playback-status">
@@ -524,6 +636,10 @@
     </div>
     <script>
         (() => {
+            // Auto-scroll is for the booth iPad only: open the page with ?display=1.
+            // Visitors who scan the QR code get a normal page they scroll themselves.
+            if (!/[?&]display(=1|=true)?(&|$)/.test(window.location.search)) return;
+            document.documentElement.classList.add('display-mode');
             const controls = document.querySelector('.playback-controls');
             const toggle = document.getElementById('playback-toggle');
             const speedSelect = document.getElementById('playback-speed');

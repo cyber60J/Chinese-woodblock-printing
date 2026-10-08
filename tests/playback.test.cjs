@@ -28,7 +28,7 @@ function surface() {
     };
 }
 
-function browser({ height = 5000, top = 0 } = {}) {
+function browser({ height = 5000, top = 0, search = '?display=1' } = {}) {
     let now = 0;
     let scrollY = top;
     let frames = [];
@@ -52,13 +52,15 @@ function browser({ height = 5000, top = 0 } = {}) {
     Object.defineProperty(scrollingElement, 'scrollTop', {
         get: () => scrollY, set: value => { scrollY = value; },
     });
+    const rootClasses = new Set();
     const document = Object.assign(surface(), {
         hidden: false, scrollingElement,
+        documentElement: { classList: { add: name => rootClasses.add(name) } },
         querySelector: selector => selector === '.playback-controls' ? controls : null,
         getElementById: id => elements[id] ?? null,
     });
     const window = Object.assign(surface(), {
-        innerHeight: 800, innerWidth: 1024,
+        innerHeight: 800, innerWidth: 1024, location: { search },
         scrollTo(x, y) {
             const destination = typeof x === 'object' ? x.top : y;
             // Safari may report integer scrollY while playback needs fractional progress.
@@ -84,7 +86,8 @@ function browser({ height = 5000, top = 0 } = {}) {
     function run(count = 6) { for (let index = 0; index < count; index++) frame(); }
     function click() { elements['playback-toggle'].emit('click', { target: elements['playback-toggle'] }); }
     function start() { frame(4010); run(); }
-    return { window, document, controls, elements, scrollingElement, frame, run, click, start };
+    function pendingFrames() { return frames.length; }
+    return { window, document, controls, elements, scrollingElement, rootClasses, frame, run, click, start, pendingFrames };
 }
 
 test('Published and demo pages share playback and expose an accessible status', () => {
@@ -93,6 +96,21 @@ test('Published and demo pages share playback and expose an accessible status', 
     for (const source of [html, demo]) {
         assert.ok(/<[^>]+(?=[^>]*\bid="playback-status-text")(?=[^>]*\brole="status")[^>]*>/.test(source), 'Playback must expose a screen-reader status');
         assert.ok(/<[^>]+(?=[^>]*\bid="playback-countdown")(?=[^>]*\baria-hidden="true")[^>]*>/.test(source), 'Changing countdown digits must not be announced every frame');
+    }
+});
+
+test('Visitors without ?display=1 get a static page: no controls, no animation loop', () => {
+    for (const search of ['', '?utm_source=qr', '?displayed=1']) {
+        const page = browser({ search });
+        assert.equal(page.controls.hidden, true, `Controls must stay hidden for "${search}"`);
+        assert.equal(page.pendingFrames(), 0, `No animation loop may start for "${search}"`);
+        assert.equal(page.rootClasses.has('display-mode'), false);
+        assert.equal(page.window.scrollY, 0);
+    }
+    for (const search of ['?display=1', '?display', '?lang=zh&display=1', '?display=true']) {
+        const page = browser({ search });
+        assert.equal(page.controls.hidden, false, `Display mode must start for "${search}"`);
+        assert.equal(page.rootClasses.has('display-mode'), true);
     }
 });
 
