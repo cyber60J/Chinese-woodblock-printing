@@ -322,28 +322,35 @@
             .gallery-item { transition: none; }
             .gallery-item:hover { transform: none; }
         }
-        .display-mode .footer { padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)); }
+        .display-mode .footer { padding-bottom: calc(210px + env(safe-area-inset-bottom, 0px)); }
         .playback-controls {
             position: fixed;
             z-index: 10;
-            left: 50%;
+            right: calc(12px + env(safe-area-inset-right, 0px));
             bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            max-width: calc(100% - 24px - env(safe-area-inset-right, 0px) - env(safe-area-inset-left, 0px));
+            font-size: .9rem;
+        }
+        .playback-controls[hidden], .playback-panel[hidden] { display: none; }
+        .playback-panel {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             gap: 12px;
             width: max-content;
-            max-width: calc(100% - 24px);
+            max-width: 100%;
+            box-sizing: border-box;
             padding: 12px 16px;
             border: 1px solid #dcc9b4;
             border-radius: 8px;
             background: #fff8f0;
             box-shadow: 0 3px 16px rgba(44,24,16,.2);
-            font-size: .9rem;
         }
-        .playback-controls[hidden] { display: none; }
         .playback-status {
             flex-basis: 100%;
             display: flex;
@@ -363,6 +370,15 @@
         }
         .playback-controls[data-playback-state="playing"] .playback-status { color: #25633b; }
         .playback-controls[data-playback-state="paused"] .playback-status { color: #8b0000; }
+        .playback-indicator {
+            width: 10px;
+            height: 10px;
+            flex: 0 0 10px;
+            border-radius: 50%;
+            background: #765021;
+        }
+        .playback-controls[data-playback-state="playing"] .playback-indicator { background: #25633b; }
+        .playback-controls[data-playback-state="paused"] .playback-indicator { background: #8b0000; }
         .playback-controls label { display: flex; align-items: center; gap: 8px; }
         .playback-controls button, .playback-controls select {
             min-height: 52px;
@@ -377,12 +393,26 @@
         }
         .playback-controls button { min-width: 150px; background: #8b0000; color: #fff; font-weight: 700; }
         .playback-controls button:active { background: #570000; }
+        #playback-panel-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 0;
+            max-width: 100%;
+            border-color: #dcc9b4;
+            border-radius: 8px;
+            background: #fff8f0;
+            color: #8b0000;
+            box-shadow: 0 3px 12px rgba(44,24,16,.15);
+        }
+        #playback-panel-toggle:active { background: #f1e3d3; }
         .playback-controls button:focus-visible, .playback-controls select:focus-visible {
             outline: 3px solid #b86a22;
             outline-offset: 3px;
         }
         @media (max-width: 600px) {
-            .display-mode .footer { padding-bottom: calc(240px + env(safe-area-inset-bottom, 0px)); }
+            .display-mode .footer { padding-bottom: calc(300px + env(safe-area-inset-bottom, 0px)); }
         }
 
         /* Language switch for visitors' phones: both languages by default. */
@@ -605,18 +635,25 @@
         <p><span lang="zh-CN">2026 AIPPI · 50号展位 · 中国印刷文化体验</span><span class="sep"> | </span><span lang="en">AIPPI 2026 · Booth 50 · A Chinese Printing Experience</span></p>
     </footer>
     <div class="playback-controls" role="group" aria-label="自动循环展示 / Automatic scrolling" hidden>
-        <div class="playback-status">
-            <span id="playback-status-text" role="status" aria-live="polite">即将播放 / Starting</span>
-            <span id="playback-countdown" aria-hidden="true"></span>
+        <div id="playback-panel" class="playback-panel" hidden>
+            <div class="playback-status">
+                <span id="playback-status-text" role="status" aria-live="polite">即将播放 / Starting</span>
+                <span id="playback-countdown" aria-hidden="true"></span>
+            </div>
+            <button id="playback-toggle" type="button" aria-pressed="false">暂停 / Pause</button>
+            <label for="playback-speed">速度 / Speed
+                <select id="playback-speed">
+                    <option value="18">慢 / Slow</option>
+                    <option value="28" selected>中 / Normal</option>
+                    <option value="45">快 / Fast</option>
+                </select>
+            </label>
         </div>
-        <button id="playback-toggle" type="button" aria-pressed="false">暂停 / Pause</button>
-        <label for="playback-speed">速度 / Speed
-            <select id="playback-speed">
-                <option value="18">慢 / Slow</option>
-                <option value="28" selected>中 / Normal</option>
-                <option value="45">快 / Fast</option>
-            </select>
-        </label>
+        <button id="playback-panel-toggle" type="button" aria-expanded="false" aria-controls="playback-panel">
+            <span class="playback-indicator" aria-hidden="true"></span>
+            <span id="playback-panel-label">播放设置 / Controls</span>
+            <span id="playback-panel-icon" aria-hidden="true">＋</span>
+        </button>
     </div>
     <script>
         (() => {
@@ -625,6 +662,10 @@
             if (!/[?&]display(=1|=true)?(&|$)/.test(window.location.search)) return;
             document.documentElement.classList.add('display-mode');
             const controls = document.querySelector('.playback-controls');
+            const panel = document.getElementById('playback-panel');
+            const panelToggle = document.getElementById('playback-panel-toggle');
+            const panelLabel = document.getElementById('playback-panel-label');
+            const panelIcon = document.getElementById('playback-panel-icon');
             const toggle = document.getElementById('playback-toggle');
             const speedSelect = document.getElementById('playback-speed');
             const statusText = document.getElementById('playback-status-text');
@@ -644,6 +685,19 @@
             let displayedCountdown = '';
 
             controls.hidden = false;
+
+            function updatePanelButton() {
+                panelToggle.setAttribute('aria-expanded', String(!panel.hidden));
+                panelToggle.setAttribute('aria-label', (panel.hidden ? '展开播放设置 / Show controls' : '收起播放设置 / Hide controls') + ' — ' + statusText.textContent);
+                panelLabel.textContent = panel.hidden ? '播放设置 / Controls' : '收起 / Hide';
+                panelIcon.textContent = panel.hidden ? '＋' : '−';
+            }
+
+            // Showing settings changes only the panel, never playback or reading timers.
+            panelToggle.addEventListener('click', () => {
+                panel.hidden = !panel.hidden;
+                updatePanelButton();
+            });
 
             function showStatus(time) {
                 let state = 'playing';
@@ -673,6 +727,7 @@
                     statusText.textContent = labels[state];
                     controls.setAttribute('data-playback-state', state);
                     displayedState = state;
+                    updatePanelButton();
                 }
                 if (remaining !== displayedCountdown) {
                     countdown.textContent = remaining;
@@ -739,6 +794,7 @@
             document.addEventListener('wheel', holdForReading, { passive: true });
             document.addEventListener('keydown', (event) => {
                 if (event.target.closest('select, input, textarea')) return;
+                if ([' ', 'Enter'].includes(event.key) && event.target.closest('.playback-controls button')) return;
                 if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
                     holdForReading();
                 }

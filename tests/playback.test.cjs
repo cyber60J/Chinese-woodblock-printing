@@ -33,9 +33,10 @@ function browser({ height = 5000, top = 0, search = '?display=1' } = {}) {
     let scrollY = top;
     let frames = [];
     const elements = {};
-    for (const id of ['playback-toggle', 'playback-speed', 'playback-status-text', 'playback-countdown']) {
+    for (const id of ['playback-toggle', 'playback-speed', 'playback-status-text', 'playback-countdown',
+        'playback-panel', 'playback-panel-toggle', 'playback-panel-label', 'playback-panel-icon']) {
         elements[id] = Object.assign(surface(), {
-            textContent: '', value: id === 'playback-speed' ? '28' : '', hidden: false,
+            textContent: '', value: id === 'playback-speed' ? '28' : '', hidden: id === 'playback-panel',
             dataset: {}, attributes: {},
             setAttribute(name, value) { this.attributes[name] = value; },
             closest(selector) { return selector.includes('playback-controls') ? controls : null; },
@@ -131,6 +132,51 @@ test('Startup waits four seconds; Play then resumes within a few display frames'
     assert.ok(page.window.scrollY > stopped, 'Play must visibly move without the old one-second wait');
     assert.equal(page.controls.dataset.playbackState, 'playing');
     assert.ok(page.elements['playback-status-text'].textContent.length > 0);
+});
+
+test('Folding settings preserves startup, active playback and explicit Pause', () => {
+    const page = browser();
+    const panel = page.elements['playback-panel'];
+    const button = page.elements['playback-panel-toggle'];
+    const fold = () => button.emit('click', { target: button });
+    assert.equal(panel.hidden, true);
+    assert.equal(button.attributes['aria-expanded'], 'false');
+    page.frame(3000);
+    fold();
+    assert.equal(panel.hidden, false);
+    assert.equal(button.attributes['aria-expanded'], 'true');
+    page.frame(1100);
+    page.run();
+    assert.ok(page.window.scrollY > 0, 'Opening controls must not extend startup');
+    const before = page.window.scrollY;
+    fold();
+    page.run();
+    assert.ok(page.window.scrollY > before, 'Closing controls must not stop playback');
+    page.click();
+    const stopped = page.window.scrollY;
+    fold();
+    fold();
+    page.frame(16000);
+    page.run();
+    assert.equal(page.window.scrollY, stopped, 'Folding must not override explicit Pause');
+    assert.ok(button.attributes['aria-label'].includes('Paused'));
+});
+
+test('Keyboard activation of settings adds no reading delay; page navigation still does', () => {
+    const page = browser();
+    const button = page.elements['playback-panel-toggle'];
+    page.start();
+    const before = page.window.scrollY;
+    for (const key of [' ', 'Enter']) {
+        page.document.emit('keydown', { key, target: button });
+        button.emit('click', { target: button });
+        page.run();
+    }
+    assert.ok(page.window.scrollY > before, 'Native Space/Enter must only toggle settings');
+    page.document.emit('keydown', { key: 'End', target: button });
+    const stopped = page.window.scrollY;
+    page.run();
+    assert.equal(page.window.scrollY, stopped, 'Scroll keys must still grant reading time');
 });
 
 test('Play clears stale touch/pointer state; late releases cannot add another wait', () => {
